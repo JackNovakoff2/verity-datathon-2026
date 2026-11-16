@@ -1,0 +1,1000 @@
+{
+ "s01_probleme": {
+  "dur": 14.58,
+  "narr": 12.38,
+  "lead": 0.3,
+  "speech_end": 12.680000000000001,
+  "text": "Demandez à une intelligence artificielle si votre portefeuille est trop risqué. Elle vous répondra avec aplomb, en quelques secondes, avec de beaux chiffres. Mais d'où viennent-ils ? Personne ne peut les vérifier.",
+  "sentences": [
+   {
+    "text": "Demandez à une intelligence artificielle si votre portefeuille est trop risqué.",
+    "start": 0.658042,
+    "end": 4.88104125
+   },
+   {
+    "text": "Elle vous répondra avec aplomb, en quelques secondes, avec de beaux chiffres.",
+    "start": 4.90104125,
+    "end": 9.235594
+   },
+   {
+    "text": "Mais d'où viennent-ils ?",
+    "start": 9.255594,
+    "end": 10.870112903225808
+   },
+   {
+    "text": "Personne ne peut les vérifier.",
+    "start": 10.890112903225807,
+    "end": 12.930000000000001
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.658042
+   },
+   {
+    "pos": 79,
+    "t": 4.844164999999999
+   },
+   {
+    "pos": 111,
+    "t": 6.664205
+   },
+   {
+    "pos": 133,
+    "t": 7.8332299999999995
+   },
+   {
+    "pos": 157,
+    "t": 9.189975
+   },
+   {
+    "pos": 182,
+    "t": 10.83045
+   },
+   {
+    "pos": 213,
+    "t": 12.680000000000001
+   }
+  ]
+ },
+ "s02_probleme2": {
+  "dur": 20.86,
+  "narr": 19.06,
+  "lead": 0.3,
+  "speech_end": 19.36,
+  "text": "En finance, un chiffre sans preuve n'est pas une information : c'est un risque. Et chaque investisseur est différent. Amira a vingt-six ans et quinze ans devant elle. Mateo tient à ses critères ESG. Robert prépare sa retraite. Un même conseil générique ne peut pas leur convenir à tous.",
+  "sentences": [
+   {
+    "text": "En finance, un chiffre sans preuve n'est pas une information : c'est un risque.",
+    "start": 0.6571670000000001,
+    "end": 5.812975363636364
+   },
+   {
+    "text": "Et chaque investisseur est différent.",
+    "start": 5.832975363636364,
+    "end": 7.501378571428572
+   },
+   {
+    "text": "Amira a vingt-six ans et quinze ans devant elle.",
+    "start": 7.5213785714285715,
+    "end": 10.724225
+   },
+   {
+    "text": "Mateo tient à ses critères ESG.",
+    "start": 10.744225,
+    "end": 13.612987500000001
+   },
+   {
+    "text": "Robert prépare sa retraite.",
+    "start": 13.6329875,
+    "end": 15.775023333333333
+   },
+   {
+    "text": "Un même conseil générique ne peut pas leur convenir à tous.",
+    "start": 15.795023333333333,
+    "end": 19.61
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.6571670000000001
+   },
+   {
+    "pos": 11,
+    "t": 1.4788750000000002
+   },
+   {
+    "pos": 62,
+    "t": 5.043335
+   },
+   {
+    "pos": 117,
+    "t": 7.456125
+   },
+   {
+    "pos": 166,
+    "t": 10.65355
+   },
+   {
+    "pos": 198,
+    "t": 13.555150000000001
+   },
+   {
+    "pos": 226,
+    "t": 15.7346
+   },
+   {
+    "pos": 286,
+    "t": 19.36
+   }
+  ]
+ },
+ "s03_solution": {
+  "dur": 21.76,
+  "narr": 19.56,
+  "lead": 0.3,
+  "speech_end": 19.86,
+  "text": "Voici Verity. Notre idée tient en une phrase : chaque chiffre a un reçu. Verity intervient tôt dans le parcours du client, dès l'ouverture du compte. On raconte sa situation. L'agent la transforme en mandat, construit un portefeuille simulé, examine chaque demande, et prouve chacune de ses affirmations.",
+  "sentences": [
+   {
+    "text": "Voici Verity.",
+    "start": 0.6569579999999999,
+    "end": 2.0371607575757578
+   },
+   {
+    "text": "Notre idée tient en une phrase : chaque chiffre a un reçu.",
+    "start": 2.057160757575758,
+    "end": 5.7488617
+   },
+   {
+    "text": "Verity intervient tôt dans le parcours du client, dès l'ouverture du compte.",
+    "start": 5.7688616999999995,
+    "end": 10.3953004
+   },
+   {
+    "text": "On raconte sa situation.",
+    "start": 10.4153004,
+    "end": 12.38633787878788
+   },
+   {
+    "text": "L'agent la transforme en mandat, construit un portefeuille simulé, examine chaque demande, et prouve chacune de ses affirmations.",
+    "start": 12.40633787878788,
+    "end": 20.11
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.6569579999999999
+   },
+   {
+    "pos": 13,
+    "t": 1.99621
+   },
+   {
+    "pos": 46,
+    "t": 4.007585
+   },
+   {
+    "pos": 72,
+    "t": 5.709395
+   },
+   {
+    "pos": 122,
+    "t": 8.68273
+   },
+   {
+    "pos": 149,
+    "t": 10.33484
+   },
+   {
+    "pos": 174,
+    "t": 12.346350000000001
+   },
+   {
+    "pos": 207,
+    "t": 14.32595
+   },
+   {
+    "pos": 241,
+    "t": 16.1629
+   },
+   {
+    "pos": 265,
+    "t": 17.691550000000003
+   },
+   {
+    "pos": 304,
+    "t": 19.86
+   }
+  ]
+ },
+ "s04_architecture": {
+  "dur": 38.41,
+  "narr": 35.81,
+  "lead": 0.3,
+  "speech_end": 36.11,
+  "text": "Voici comment cela fonctionne. D'abord les données : trente et un actifs canadiens, américains, des obligations, de l'or et de la cryptomonnaie, avec cinq ans de prix quotidiens convertis en dollars canadiens. Ensuite, cinq agents. L'agent d'accueil traduit le récit du client en règles vérifiables. Le constructeur bâtit le portefeuille, en n'utilisant que les données connues à la date de décision. L'analyste calcule chaque chiffre deux fois, avec deux méthodes indépendantes. Le narrateur rédige l'explication. Et le vérificateur refuse toute phrase qui contient un nombre sans reçu.",
+  "sentences": [
+   {
+    "text": "Voici comment cela fonctionne.",
+    "start": 0.6575420000000001,
+    "end": 2.4909984090909085
+   },
+   {
+    "text": "D'abord les données : trente et un actifs canadiens, américains, des obligations,",
+    "start": 2.5109984090909085,
+    "end": 7.546067031250001
+   },
+   {
+    "text": "de l'or et de la cryptomonnaie, avec cinq ans de prix quotidiens convertis en dollars canadiens.",
+    "start": 7.56606703125,
+    "end": 13.682500000000003
+   },
+   {
+    "text": "Ensuite, cinq agents.",
+    "start": 13.702500000000002,
+    "end": 14.791075735294118
+   },
+   {
+    "text": "L'agent d'accueil traduit le récit du client en règles vérifiables.",
+    "start": 14.811075735294118,
+    "end": 18.708610256410257
+   },
+   {
+    "text": "Le constructeur bâtit le portefeuille, en n'utilisant que les données connues à la date de décision.",
+    "start": 18.728610256410256,
+    "end": 24.486183333333337
+   },
+   {
+    "text": "L'analyste calcule chaque chiffre deux fois, avec deux méthodes indépendantes.",
+    "start": 24.506183333333336,
+    "end": 29.30935714285714
+   },
+   {
+    "text": "Le narrateur rédige l'explication.",
+    "start": 29.32935714285714,
+    "end": 31.729758904109588
+   },
+   {
+    "text": "Et le vérificateur refuse toute phrase qui contient un nombre sans reçu.",
+    "start": 31.749758904109587,
+    "end": 36.36
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.6575420000000001
+   },
+   {
+    "pos": 30,
+    "t": 2.4486649999999996
+   },
+   {
+    "pos": 52,
+    "t": 3.82
+   },
+   {
+    "pos": 83,
+    "t": 5.6018099999999995
+   },
+   {
+    "pos": 95,
+    "t": 6.43471
+   },
+   {
+    "pos": 112,
+    "t": 7.513205
+   },
+   {
+    "pos": 144,
+    "t": 9.204790000000001
+   },
+   {
+    "pos": 209,
+    "t": 13.652450000000002
+   },
+   {
+    "pos": 231,
+    "t": 14.75355
+   },
+   {
+    "pos": 299,
+    "t": 18.6653
+   },
+   {
+    "pos": 338,
+    "t": 21.1344
+   },
+   {
+    "pos": 400,
+    "t": 24.442400000000003
+   },
+   {
+    "pos": 445,
+    "t": 27.31265
+   },
+   {
+    "pos": 479,
+    "t": 29.25995
+   },
+   {
+    "pos": 514,
+    "t": 31.6892
+   },
+   {
+    "pos": 587,
+    "t": 36.11
+   }
+  ]
+ },
+ "s04b_plateforme": {
+  "dur": 12.53,
+  "narr": 8.93,
+  "lead": 0.3,
+  "speech_end": 9.23,
+  "text": "Voici la plateforme de courtage du client. Il clique sur « Ouvrir un compte, Mon mandat ». Verity s'ouvre directement dans la plateforme.",
+  "sentences": [
+   {
+    "text": "Voici la plateforme de courtage du client.",
+    "start": 0.656167,
+    "end": 3.1013772058823528
+   },
+   {
+    "text": "Il clique sur « Ouvrir un compte, Mon mandat ».",
+    "start": 3.121377205882353,
+    "end": 6.245588723404255
+   },
+   {
+    "text": "Verity s'ouvre directement dans la plateforme.",
+    "start": 6.265588723404255,
+    "end": 9.48
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.656167
+   },
+   {
+    "pos": 42,
+    "t": 3.060275
+   },
+   {
+    "pos": 76,
+    "t": 5.13775
+   },
+   {
+    "pos": 90,
+    "t": 6.2011449999999995
+   },
+   {
+    "pos": 137,
+    "t": 9.23
+   }
+  ]
+ },
+ "s05_mandat": {
+  "dur": 21.46,
+  "narr": 18.86,
+  "lead": 0.3,
+  "speech_end": 19.16,
+  "text": "Choisissons Robert, cinquante-neuf ans, qui prépare sa retraite. Je clique sur son profil : son histoire apparaît, dans ses propres mots. Verity la traduit en règles : pas de crypto, au moins quarante pour cent d'obligations, et une baisse maximale de dix pour cent. Robert confirme, et je construis son portefeuille.",
+  "sentences": [
+   {
+    "text": "Choisissons Robert, cinquante-neuf ans, qui prépare sa retraite.",
+    "start": 0.6635,
+    "end": 4.561674444444445
+   },
+   {
+    "text": "Je clique sur son profil : son histoire apparaît, dans ses propres mots.",
+    "start": 4.581674444444444,
+    "end": 8.935136500000002
+   },
+   {
+    "text": "Verity la traduit en règles : pas de crypto, au moins quarante pour cent d'obligations, et une baisse maximale de dix pour cent.",
+    "start": 8.955136500000002,
+    "end": 15.972491176470589
+   },
+   {
+    "text": "Robert confirme, et je construis son portefeuille.",
+    "start": 15.992491176470589,
+    "end": 19.41
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.6635
+   },
+   {
+    "pos": 19,
+    "t": 1.831185
+   },
+   {
+    "pos": 39,
+    "t": 2.90875
+   },
+   {
+    "pos": 64,
+    "t": 4.513355
+   },
+   {
+    "pos": 91,
+    "t": 6.35798
+   },
+   {
+    "pos": 114,
+    "t": 7.574145000000001
+   },
+   {
+    "pos": 137,
+    "t": 8.890955000000002
+   },
+   {
+    "pos": 167,
+    "t": 10.816400000000002
+   },
+   {
+    "pos": 182,
+    "t": 11.4105
+   },
+   {
+    "pos": 225,
+    "t": 13.6449
+   },
+   {
+    "pos": 266,
+    "t": 15.9053
+   },
+   {
+    "pos": 283,
+    "t": 17.38755
+   },
+   {
+    "pos": 317,
+    "t": 19.16
+   }
+  ]
+ },
+ "s06_recus": {
+  "dur": 24.44,
+  "narr": 18.84,
+  "lead": 0.3,
+  "speech_end": 19.14,
+  "text": "Le portefeuille respecte chacune des règles : voici les contrôles. Plus bas, dans le texte d'explication, chaque nombre est un badge bleu. Je clique sur l'un d'eux, et son reçu s'ouvre. On y lit la formule, la période et les titres concernés. Deux calculs indépendants donnent le même résultat.",
+  "sentences": [
+   {
+    "text": "Le portefeuille respecte chacune des règles : voici les contrôles.",
+    "start": 0.657333,
+    "end": 4.528392500000001
+   },
+   {
+    "text": "Plus bas, dans le texte d'explication, chaque nombre est un badge bleu.",
+    "start": 4.5483925,
+    "end": 8.95091826923077
+   },
+   {
+    "text": "Je clique sur l'un d'eux, et son reçu s'ouvre.",
+    "start": 8.97091826923077,
+    "end": 12.141695238095238
+   },
+   {
+    "text": "On y lit la formule, la période et les titres concernés.",
+    "start": 12.161695238095238,
+    "end": 16.11350096153846
+   },
+   {
+    "text": "Deux calculs indépendants donnent le même résultat.",
+    "start": 16.13350096153846,
+    "end": 19.39
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.657333
+   },
+   {
+    "pos": 45,
+    "t": 2.9895199999999997
+   },
+   {
+    "pos": 66,
+    "t": 4.469355
+   },
+   {
+    "pos": 76,
+    "t": 5.25973
+   },
+   {
+    "pos": 105,
+    "t": 6.993704999999999
+   },
+   {
+    "pos": 138,
+    "t": 8.908395
+   },
+   {
+    "pos": 164,
+    "t": 10.534
+   },
+   {
+    "pos": 185,
+    "t": 12.08465
+   },
+   {
+    "pos": 206,
+    "t": 13.7026
+   },
+   {
+    "pos": 242,
+    "t": 16.07455
+   },
+   {
+    "pos": 294,
+    "t": 19.14
+   }
+  ]
+ },
+ "s07_temps": {
+  "dur": 23.62,
+  "narr": 20.02,
+  "lead": 0.3,
+  "speech_end": 20.32,
+  "text": "Voici la machine à remonter le temps : je fais glisser la date de décision. Verity ne garde que ce qui était connu ce jour-là, et reconstruit le portefeuille. Puis on découvre ce qui s'est réellement passé : en deux mille vingt-deux, actions et obligations ont baissé ensemble. Le portefeuille de Robert a mieux résisté qu'un mélange classique.",
+  "sentences": [
+   {
+    "text": "Voici la machine à remonter le temps : je fais glisser la date de décision.",
+    "start": 0.656917,
+    "end": 4.834991862745098
+   },
+   {
+    "text": "Verity ne garde que ce qui était connu ce jour-là, et reconstruit le portefeuille.",
+    "start": 4.854991862745098,
+    "end": 9.79054918367347
+   },
+   {
+    "text": "Puis on découvre ce qui s'est réellement passé : en deux mille vingt-deux, actions et obligations ont baissé ensemble.",
+    "start": 9.81054918367347,
+    "end": 16.48145671641791
+   },
+   {
+    "text": "Le portefeuille de Robert a mieux résisté qu'un mélange classique.",
+    "start": 16.50145671641791,
+    "end": 20.57
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.656917
+   },
+   {
+    "pos": 38,
+    "t": 2.5681499999999997
+   },
+   {
+    "pos": 75,
+    "t": 4.79481
+   },
+   {
+    "pos": 126,
+    "t": 7.864085
+   },
+   {
+    "pos": 158,
+    "t": 9.75552
+   },
+   {
+    "pos": 207,
+    "t": 12.45195
+   },
+   {
+    "pos": 233,
+    "t": 13.654600000000002
+   },
+   {
+    "pos": 277,
+    "t": 16.4436
+   },
+   {
+    "pos": 344,
+    "t": 20.32
+   }
+  ]
+ },
+ "s08_gouverneur": {
+  "dur": 36.56,
+  "narr": 30.96,
+  "lead": 0.3,
+  "speech_end": 31.26,
+  "text": "Robert est tenté par NVIDIA : il veut y mettre cinquante pour cent de son portefeuille. Je clique sur l'essai : le gouverneur compare la demande à son mandat, et la refuse. Voici la différence : sans l'agent, l'ordre passait ; avec Verity, le risque est chiffré. La volatilité passerait de huit à vingt-six pour cent. NVIDIA représenterait presque tout le risque, alors que cette action avait déjà perdu plus de soixante pour cent. Verity propose alors la plus grande part compatible avec le mandat.",
+  "sentences": [
+   {
+    "text": "Robert est tenté par NVIDIA : il veut y mettre cinquante pour cent de son portefeuille.",
+    "start": 0.656292,
+    "end": 5.773039583333334
+   },
+   {
+    "text": "Je clique sur l'essai : le gouverneur compare la demande à son mandat, et la refuse.",
+    "start": 5.793039583333334,
+    "end": 11.520179166666667
+   },
+   {
+    "text": "Voici la différence : sans l'agent, l'ordre passait ; avec Verity, le risque est chiffré.",
+    "start": 11.540179166666666,
+    "end": 17.239248181818184
+   },
+   {
+    "text": "La volatilité passerait de huit à vingt-six pour cent.",
+    "start": 17.259248181818183,
+    "end": 19.493558695652176
+   },
+   {
+    "text": "NVIDIA représenterait presque tout le risque, alors que cette action avait déjà perdu plus de soixante pour cent.",
+    "start": 19.513558695652176,
+    "end": 27.196550000000002
+   },
+   {
+    "text": "Verity propose alors la plus grande part compatible avec le mandat.",
+    "start": 27.21655,
+    "end": 31.51
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.656292
+   },
+   {
+    "pos": 29,
+    "t": 2.7344399999999998
+   },
+   {
+    "pos": 87,
+    "t": 5.7311000000000005
+   },
+   {
+    "pos": 111,
+    "t": 7.21765
+   },
+   {
+    "pos": 158,
+    "t": 10.79345
+   },
+   {
+    "pos": 194,
+    "t": 12.5856
+   },
+   {
+    "pos": 208,
+    "t": 13.658050000000001
+   },
+   {
+    "pos": 226,
+    "t": 14.782200000000001
+   },
+   {
+    "pos": 239,
+    "t": 15.8572
+   },
+   {
+    "pos": 262,
+    "t": 17.219150000000003
+   },
+   {
+    "pos": 317,
+    "t": 19.42455
+   },
+   {
+    "pos": 363,
+    "t": 23.51895
+   },
+   {
+    "pos": 431,
+    "t": 27.156200000000002
+   },
+   {
+    "pos": 499,
+    "t": 31.26
+   }
+  ]
+ },
+ "s09_recul": {
+  "dur": 14.71,
+  "narr": 11.11,
+  "lead": 0.3,
+  "speech_end": 11.41,
+  "text": "Avec le recul, NVIDIA a beaucoup monté, et Verity le dit sans détour. Mais rien ne le garantissait au moment de la décision : choisir le gagnant après coup n'est pas une stratégie.",
+  "sentences": [
+   {
+    "text": "Avec le recul, NVIDIA a beaucoup monté, et Verity le dit sans détour.",
+    "start": 0.658917,
+    "end": 5.3570737500000005
+   },
+   {
+    "text": "Mais rien ne le garantissait au moment de la décision : choisir le gagnant après coup n'est pas une stratégie.",
+    "start": 5.37707375,
+    "end": 11.66
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.658917
+   },
+   {
+    "pos": 14,
+    "t": 1.6689399999999999
+   },
+   {
+    "pos": 39,
+    "t": 3.297605
+   },
+   {
+    "pos": 69,
+    "t": 5.322355
+   },
+   {
+    "pos": 125,
+    "t": 8.386605000000001
+   },
+   {
+    "pos": 180,
+    "t": 11.41
+   }
+  ]
+ },
+ "s10_contexte": {
+  "dur": 16.62,
+  "narr": 14.02,
+  "lead": 0.3,
+  "speech_end": 14.32,
+  "text": "Je choisis Amira, qui aime la technologie et accepte un peu de crypto : son portefeuille est plus audacieux, mais plafonné pour rester diversifié. Je choisis Mateo : aucun titre d'énergie, et au moins quinze pour cent dans un fonds ESG.",
+  "sentences": [
+   {
+    "text": "Je choisis Amira, qui aime la technologie et accepte un peu de crypto : son portefeuille est plus audacieux, mais plafonné pour rester diversifié.",
+    "start": 0.6577500000000001,
+    "end": 8.989558684210529
+   },
+   {
+    "text": "Je choisis Mateo : aucun titre d'énergie, et au moins quinze pour cent dans un fonds ESG.",
+    "start": 9.009558684210528,
+    "end": 14.57
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.6577500000000001
+   },
+   {
+    "pos": 17,
+    "t": 1.99171
+   },
+   {
+    "pos": 71,
+    "t": 4.809959999999999
+   },
+   {
+    "pos": 108,
+    "t": 6.682045
+   },
+   {
+    "pos": 146,
+    "t": 8.935165000000001
+   },
+   {
+    "pos": 165,
+    "t": 10.348645000000001
+   },
+   {
+    "pos": 188,
+    "t": 11.69565
+   },
+   {
+    "pos": 236,
+    "t": 14.32
+   }
+  ]
+ },
+ "s11_triche": {
+  "dur": 18.54,
+  "narr": 12.94,
+  "lead": 0.3,
+  "speech_end": 13.24,
+  "text": "Et si un agent inventait un chiffre ? J'ouvre le vérificateur et j'y colle cette phrase : ce portefeuille a rendu plus trois cents pour cent. Je clique sur Vérifier : il la rejette, parce que ce nombre n'a pas de reçu.",
+  "sentences": [
+   {
+    "text": "Et si un agent inventait un chiffre ?",
+    "start": 0.658792,
+    "end": 2.7124583653846153
+   },
+   {
+    "text": "J'ouvre le vérificateur et j'y colle cette phrase : ce portefeuille a rendu plus trois cents pour cent.",
+    "start": 2.7324583653846153,
+    "end": 8.529483400000002
+   },
+   {
+    "text": "Je clique sur Vérifier : il la rejette, parce que ce nombre n'a pas de reçu.",
+    "start": 8.549483400000002,
+    "end": 13.49
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.658792
+   },
+   {
+    "pos": 37,
+    "t": 2.673605
+   },
+   {
+    "pos": 89,
+    "t": 5.73398
+   },
+   {
+    "pos": 141,
+    "t": 8.480080000000001
+   },
+   {
+    "pos": 166,
+    "t": 10.215165
+   },
+   {
+    "pos": 181,
+    "t": 11.19025
+   },
+   {
+    "pos": 218,
+    "t": 13.24
+   }
+  ]
+ },
+ "s12_preuves": {
+  "dur": 14.58,
+  "narr": 10.78,
+  "lead": 0.3,
+  "speech_end": 11.08,
+  "text": "Tout est déployé sur Amazon Web Services. Les agents tournent sur Amazon Bedrock. Un test détruit toutes les données postérieures à la décision, et le portefeuille ne change pas d'un cent.",
+  "sentences": [
+   {
+    "text": "Tout est déployé sur Amazon Web Services.",
+    "start": 0.657458,
+    "end": 3.263636375
+   },
+   {
+    "text": "Les agents tournent sur Amazon Bedrock.",
+    "start": 3.283636375,
+    "end": 5.700346904761904
+   },
+   {
+    "text": "Un test détruit toutes les données postérieures à la décision, et le portefeuille ne change pas d'un cent.",
+    "start": 5.720346904761904,
+    "end": 11.33
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.657458
+   },
+   {
+    "pos": 41,
+    "t": 3.222455
+   },
+   {
+    "pos": 81,
+    "t": 5.669709999999999
+   },
+   {
+    "pos": 144,
+    "t": 8.859835
+   },
+   {
+    "pos": 188,
+    "t": 11.08
+   }
+  ]
+ },
+ "s13_limites": {
+  "dur": 16.63,
+  "narr": 13.03,
+  "lead": 0.3,
+  "speech_end": 13.33,
+  "text": "Verity reste une simulation : aucun ordre réel, aucun conseil personnalisé, et ses limites sont dites clairement. Pour le client, c'est de la clarté. Pour le courtier, c'est une confiance que l'on peut vérifier.",
+  "sentences": [
+   {
+    "text": "Verity reste une simulation : aucun ordre réel, aucun conseil personnalisé, et ses limites sont dites clairement.",
+    "start": 0.656458,
+    "end": 7.6553390625
+   },
+   {
+    "text": "Pour le client, c'est de la clarté.",
+    "start": 7.6753390625,
+    "end": 10.017966666666668
+   },
+   {
+    "text": "Pour le courtier, c'est une confiance que l'on peut vérifier.",
+    "start": 10.037966666666668,
+    "end": 13.58
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.656458
+   },
+   {
+    "pos": 29,
+    "t": 2.5465649999999997
+   },
+   {
+    "pos": 47,
+    "t": 3.967435
+   },
+   {
+    "pos": 75,
+    "t": 5.645105
+   },
+   {
+    "pos": 113,
+    "t": 7.610645
+   },
+   {
+    "pos": 129,
+    "t": 8.645750000000001
+   },
+   {
+    "pos": 149,
+    "t": 9.976500000000001
+   },
+   {
+    "pos": 167,
+    "t": 11.0829
+   },
+   {
+    "pos": 211,
+    "t": 13.33
+   }
+  ]
+ },
+ "s14_fin": {
+  "dur": 7.63,
+  "narr": 2.83,
+  "lead": 0.3,
+  "speech_end": 3.13,
+  "text": "Verity. Chaque chiffre a un reçu.",
+  "sentences": [
+   {
+    "text": "Verity.",
+    "start": 0.655917,
+    "end": 1.499625
+   },
+   {
+    "text": "Chaque chiffre a un reçu.",
+    "start": 1.519625,
+    "end": 3.38
+   }
+  ],
+  "anchors": [
+   {
+    "pos": 0,
+    "t": 0.655917
+   },
+   {
+    "pos": 7,
+    "t": 1.4552100000000001
+   },
+   {
+    "pos": 33,
+    "t": 3.13
+   }
+  ]
+ }
+}

@@ -1,0 +1,62 @@
+[
+ {
+  "id": "s01_probleme",
+  "text": "Demandez à une intelligence artificielle si votre portefeuille est trop risqué. Elle vous répondra avec aplomb, en quelques secondes, avec de beaux chiffres. Mais d'où viennent-ils ? Personne ne peut les vérifier."
+ },
+ {
+  "id": "s02_probleme2",
+  "text": "En finance, un chiffre sans preuve n'est pas une information : c'est un risque. Et chaque investisseur est différent. Amira a vingt-six ans et quinze ans devant elle. Mateo tient à ses critères ESG. Robert prépare sa retraite. Un même conseil générique ne peut pas leur convenir à tous."
+ },
+ {
+  "id": "s03_solution",
+  "text": "Voici Verity. Notre idée tient en une phrase : chaque chiffre a un reçu. Verity intervient tôt dans le parcours du client, dès l'ouverture du compte. On raconte sa situation. L'agent la transforme en mandat, construit un portefeuille simulé, examine chaque demande, et prouve chacune de ses affirmations."
+ },
+ {
+  "id": "s04_architecture",
+  "text": "Voici comment cela fonctionne. D'abord les données : trente et un actifs canadiens, américains, des obligations, de l'or et de la cryptomonnaie, avec cinq ans de prix quotidiens convertis en dollars canadiens. Ensuite, cinq agents. L'agent d'accueil traduit le récit du client en règles vérifiables. Le constructeur bâtit le portefeuille, en n'utilisant que les données connues à la date de décision. L'analyste calcule chaque chiffre deux fois, avec deux méthodes indépendantes. Le narrateur rédige l'explication. Et le vérificateur refuse toute phrase qui contient un nombre sans reçu."
+ },
+ {
+  "id": "s04b_plateforme",
+  "text": "Voici la plateforme de courtage du client. Il clique sur « Ouvrir un compte, Mon mandat ». Verity s'ouvre directement dans la plateforme."
+ },
+ {
+  "id": "s05_mandat",
+  "text": "Choisissons Robert, cinquante-neuf ans, qui prépare sa retraite. Je clique sur son profil : son histoire apparaît, dans ses propres mots. Verity la traduit en règles : pas de crypto, au moins quarante pour cent d'obligations, et une baisse maximale de dix pour cent. Robert confirme, et je construis son portefeuille."
+ },
+ {
+  "id": "s06_recus",
+  "text": "Le portefeuille respecte chacune des règles : voici les contrôles. Plus bas, dans le texte d'explication, chaque nombre est un badge bleu. Je clique sur l'un d'eux, et son reçu s'ouvre. On y lit la formule, la période et les titres concernés. Deux calculs indépendants donnent le même résultat."
+ },
+ {
+  "id": "s07_temps",
+  "text": "Voici la machine à remonter le temps : je fais glisser la date de décision. Verity ne garde que ce qui était connu ce jour-là, et reconstruit le portefeuille. Puis on découvre ce qui s'est réellement passé : en deux mille vingt-deux, actions et obligations ont baissé ensemble. Le portefeuille de Robert a mieux résisté qu'un mélange classique."
+ },
+ {
+  "id": "s08_gouverneur",
+  "text": "Robert est tenté par NVIDIA : il veut y mettre cinquante pour cent de son portefeuille. Je clique sur l'essai : le gouverneur compare la demande à son mandat, et la refuse. Voici la différence : sans l'agent, l'ordre passait ; avec Verity, le risque est chiffré. La volatilité passerait de huit à vingt-six pour cent. NVIDIA représenterait presque tout le risque, alors que cette action avait déjà perdu plus de soixante pour cent. Verity propose alors la plus grande part compatible avec le mandat."
+ },
+ {
+  "id": "s09_recul",
+  "text": "Avec le recul, NVIDIA a beaucoup monté, et Verity le dit sans détour. Mais rien ne le garantissait au moment de la décision : choisir le gagnant après coup n'est pas une stratégie."
+ },
+ {
+  "id": "s10_contexte",
+  "text": "Je choisis Amira, qui aime la technologie et accepte un peu de crypto : son portefeuille est plus audacieux, mais plafonné pour rester diversifié. Je choisis Mateo : aucun titre d'énergie, et au moins quinze pour cent dans un fonds ESG."
+ },
+ {
+  "id": "s11_triche",
+  "text": "Et si un agent inventait un chiffre ? J'ouvre le vérificateur et j'y colle cette phrase : ce portefeuille a rendu plus trois cents pour cent. Je clique sur Vérifier : il la rejette, parce que ce nombre n'a pas de reçu."
+ },
+ {
+  "id": "s12_preuves",
+  "text": "Tout est déployé sur Amazon Web Services. Les agents tournent sur Amazon Bedrock. Un test détruit toutes les données postérieures à la décision, et le portefeuille ne change pas d'un cent."
+ },
+ {
+  "id": "s13_limites",
+  "text": "Verity reste une simulation : aucun ordre réel, aucun conseil personnalisé, et ses limites sont dites clairement. Pour le client, c'est de la clarté. Pour le courtier, c'est une confiance que l'on peut vérifier."
+ },
+ {
+  "id": "s14_fin",
+  "text": "Verity. Chaque chiffre a un reçu."
+ }
+]

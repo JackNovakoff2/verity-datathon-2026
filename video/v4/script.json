@@ -1,0 +1,66 @@
+[
+ {
+  "id": "m2_hook",
+  "text": "[calmly] Vingt-six virgule deux pour cent. Un chiffre, donné avec aplomb par une intelligence artificielle. Mais d'où vient-il ? Personne ne peut le vérifier. En finance, un chiffre sans preuve n'est pas une information. C'est un risque."
+ },
+ {
+  "id": "m3_clients",
+  "text": "Et chaque investisseur est différent. Amira a vingt-six ans, et quinze ans devant elle. Mateo refuse l'énergie fossile. Robert, cinquante-neuf ans, prépare sa retraite. Un conseil générique ne peut pas leur convenir à tous."
+ },
+ {
+  "id": "m4_solution",
+  "text": "Voici Verity. Une idée : chaque chiffre a un reçu. Dès l'ouverture du compte, Verity transforme le récit du client en mandat, bâtit un portefeuille simulé, examine chaque demande, et prouve chacune de ses affirmations."
+ },
+ {
+  "id": "d1_plateforme",
+  "text": "Voici la plateforme du courtier. Un clic sur « Ouvrir un compte, Mon mandat ». Verity s'ouvre, directement dans la plateforme."
+ },
+ {
+  "id": "d2_mandat",
+  "text": "Choisissons Robert, cinquante-neuf ans, bientôt à la retraite. Un clic sur son profil : son histoire apparaît, dans ses propres mots. Verity la traduit en règles : pas de crypto, au moins quarante pour cent d'obligations, et une baisse maximale de dix pour cent. Robert confirme, et le portefeuille se construit."
+ },
+ {
+  "id": "d3_recus",
+  "text": "Chaque règle est respectée, contrôles à l'appui. Dans l'explication, chaque nombre est un badge bleu. Un clic, et son reçu s'ouvre. On y lit la formule, la période, les titres concernés. Et deux calculs indépendants donnent le même résultat."
+ },
+ {
+  "id": "d4_temps",
+  "text": "Maintenant, la machine à remonter le temps. Je recule la date de décision : Verity ne garde que ce qui était connu ce jour-là. Puis on découvre ce qui s'est réellement passé : en deux mille vingt-deux, actions et obligations ont baissé ensemble. Le portefeuille de Robert a mieux résisté qu'un mélange classique."
+ },
+ {
+  "id": "d5_gouverneur",
+  "text": "Robert est tenté par NVIDIA : cinquante pour cent de son portefeuille. Un clic : le gouverneur compare la demande au mandat, et la refuse. Sans l'agent, l'ordre passait ; avec Verity, le risque est chiffré. La volatilité passerait de huit à vingt-six pour cent. NVIDIA représenterait presque tout le risque. Verity propose alors la plus grande part compatible avec le mandat."
+ },
+ {
+  "id": "d6_recul",
+  "text": "Avec le recul, NVIDIA a beaucoup monté, et Verity le dit sans détour. Mais choisir le gagnant après coup n'est pas une stratégie."
+ },
+ {
+  "id": "d7_triche",
+  "text": "Et si un agent inventait un chiffre ? J'ouvre le vérificateur, et je colle : ce portefeuille a rendu plus trois cents pour cent. Un clic sur Vérifier : rejeté, ce nombre n'a pas de reçu."
+ },
+ {
+  "id": "d8_autres",
+  "text": "Même parcours, pour Amira, qui accepte un peu de crypto : un portefeuille plus audacieux, mais plafonné pour rester diversifié. Et pour Mateo : aucun titre d'énergie, et au moins quinze pour cent dans un fonds ESG."
+ },
+ {
+  "id": "m4b_valeur",
+  "text": "Pour le conseiller, une réponse qu'il peut montrer à son client. Pour le courtier, la trace de chaque affirmation, prête pour la conformité. Et pour le client, une décision qu'il comprend."
+ },
+ {
+  "id": "m5_agents",
+  "text": "Sous le capot, cinq agents. L'accueil traduit le récit en règles. Le constructeur n'utilise que les données connues à la date de décision. L'analyste calcule chaque chiffre deux fois, par deux méthodes indépendantes. Le narrateur rédige. Le vérificateur refuse tout nombre sans reçu."
+ },
+ {
+  "id": "m6_aws",
+  "text": "Tout tourne sur Amazon Web Services : Lambda, API Gateway, et Bedrock pour les modèles. Un test détruit toutes les données postérieures à la décision, et le portefeuille ne change pas d'un cent. Les tests indépendants passent, sur une pile dédiée."
+ },
+ {
+  "id": "m7_limites",
+  "text": "Verity reste une simulation : aucun ordre réel, aucun conseil personnalisé, et ses limites sont dites clairement. Pour le client, de la clarté. Pour le courtier, une confiance qu'on peut vérifier."
+ },
+ {
+  "id": "m8_fin",
+  "text": "Verity. Chaque chiffre a un reçu."
+ }
+]

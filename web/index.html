@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verity — chaque chiffre a un reçu</title>
+  <meta name="description" content="Portefeuille simulé sous mandat : chaque chiffre du récit renvoie à un reçu vérifiable. Simulation uniquement.">
+  <script>if(/[?&]embedded=1/.test(location.search))document.documentElement.classList.add("embedded")</script>
+  <link rel="stylesheet" href="/css/verity.css?v=11">
+  <script type="module" src="/js/app.js?v=11"></script>
+</head>
+<body>
+<div class="host-bar-preview" id="host-bar-preview" hidden><span class="b">← Retour à la plateforme</span><strong>Ouverture de compte · Mon mandat</strong><small>Simulation uniquement — aucun ordre réel</small></div>
+<script>if(/[?&]bar=1/.test(location.search)&&document.documentElement.classList.contains("embedded"))document.getElementById("host-bar-preview").hidden=false</script>
+<a class="skip" href="#main">Aller au contenu</a>
+
+<header class="bank-header">
+  <a class="brand" href="/" aria-label="Verity, accueil">
+    <img src="/assets/nbdb-reference-logo.png" alt="" width="150" height="56">
+    <span class="sep" aria-hidden="true"></span>
+    <span class="product"><b>Verity</b><span>Chaque chiffre a un reçu</span></span>
+  </a>
+  <div class="head-actions">
+    <button class="btn" type="button" id="open-how" aria-label="Comment ça marche"><span class="long">Comment ça marche</span><span class="short" aria-hidden="true">Aide</span></button>
+  </div>
+</header>
+
+<nav class="bank-toolbar" aria-label="Fil d'Ariane du parcours">
+  <div class="crumbs">
+    <ol id="crumbs">
+      <li><button class="crumb" type="button" data-step="1" data-testid="step-1" aria-current="step"><span class="n">1</span>Mon mandat</button></li>
+      <li><button class="crumb" type="button" data-step="2" data-testid="step-2" disabled><span class="n">2</span>Mon portefeuille</button></li>
+      <li><button class="crumb" type="button" data-step="3" data-testid="step-3" disabled><span class="n">3</span>Une demande</button></li>
+    </ol>
+  </div>
+</nav>
+
+<main id="main" tabindex="-1">
+
+  <!-- Étape 1 -->
+  <section id="step1" aria-labelledby="t1">
+    <div class="page-head">
+      <div class="where">Votre parcours : ouverture de compte, <b>mandat</b>, portefeuille simulé, demandes, bilan</div>
+      <h1 id="t1">Mon mandat</h1>
+      <p class="lead">Avant d'investir, vous fixez des règles : combien de variations vous acceptez, quelle part maximale par titre, ce que vous voulez éviter. C'est votre mandat. Choisissez un profil fictif ou racontez votre situation avec vos mots.</p>
+    </div>
+
+    <fieldset class="personas" id="personas">
+      <legend>Choisir un profil fictif</legend>
+      <p class="hint" style="grid-column:1/-1;margin:0">Chargement des profils…</p>
+    </fieldset>
+
+    <div class="card story">
+      <h2>Raconter ma situation avec mes mots</h2>
+      <p class="hint">L'agent d'accueil lit votre récit et le traduit en règles que vous pouvez relire. Rien n'est simulé tant que vous n'avez pas validé.</p>
+      <label for="story-text" class="sr-only">Votre situation</label>
+      <textarea id="story-text" data-testid="story-input" rows="4" placeholder="Exemple : j'ai 45 ans, je veux acheter une maison dans huit ans. Je supporte mal les grosses baisses et je ne veux pas de pétrole."></textarea>
+      <div class="row">
+        <button class="btn" type="button" id="compile" data-testid="compile-button">Traduire en règles</button>
+        <div class="status" id="compile-status" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div class="card" id="mandate-card" hidden>
+      <div class="card-head"><h2 id="mandate-title">Mandat retenu</h2></div>
+      <p class="muted" id="mandate-sub"></p>
+      <ul class="rules" id="mandate-rules"></ul>
+      <div class="assumptions" id="assumptions" hidden>
+        <h3>Hypothèses retenues</h3>
+        <p class="hint" style="margin:0">L'agent d'accueil a dû compléter votre récit sur ces points. Corrigez votre texte et traduisez de nouveau si une hypothèse ne vous convient pas.</p>
+        <ul id="assumptions-list"></ul>
+      </div>
+      <div class="row" style="margin-top:20px">
+        <button class="btn primary" type="button" id="build" data-testid="build-portfolio">Construire mon portefeuille simulé</button>
+        <span class="hint">Étape suivante : un portefeuille qui respecte ces règles, avec les données connues à la date choisie.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Étape 2 -->
+  <section id="step2" aria-labelledby="t2" hidden>
+    <div class="page-head">
+      <div class="where">Votre parcours : ouverture de compte, mandat, <b>portefeuille simulé</b>, demandes, bilan</div>
+      <h1 id="t2">Mon portefeuille</h1>
+      <p class="lead" id="s2-lead"></p>
+    </div>
+
+    <div class="card">
+      <div class="timemachine">
+        <div class="tm-date"><small id="tm-label">Date de décision</small><output id="tm-out" for="tm-range" aria-live="polite"></output></div>
+        <div>
+          <input type="range" id="tm-range" data-testid="date-slider" min="0" max="0" step="1" aria-labelledby="tm-label" aria-describedby="tm-note">
+          <div class="range-ends"><span id="tm-min"></span><span id="tm-max"></span></div>
+        </div>
+        <p class="tm-note hint" id="tm-note"><b>Seules les données jusqu'à cette date sont utilisées.</b> Déplacez le curseur pour remonter le temps : le portefeuille et le récit sont recalculés comme si nous étions ce jour-là.</p>
+      </div>
+      <div id="s2-status" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <h2>Répartition</h2>
+        <p class="hint">Poids de chaque titre, regroupés par type de placement.</p>
+        <div id="alloc" data-testid="allocation"></div>
+      </div>
+      <div class="card">
+        <h2>Les règles du mandat sont-elles respectées ?</h2>
+        <p class="hint">Chaque règle est testée sur le portefeuille construit ; la valeur réelle est affichée à droite.</p>
+        <ul class="rules" id="checks"></ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <div class="card-head"><h2>Le récit, chiffre par chiffre</h2></div>
+      <p class="narr-state" id="narr-state"></p>
+      <p class="hint">Chaque nombre en bleu est un reçu : cliquez dessus pour voir comment il a été calculé.</p>
+      <div id="story" data-testid="story"></div>
+    </div>
+
+    <div class="card">
+      <h2>Le portefeuille face à un mélange classique</h2>
+      <div id="chart-main" data-testid="chart-main" class="chart-wrap"></div>
+    </div>
+
+    <div class="row" style="margin:0 0 8px">
+      <button class="btn primary" type="button" id="to3">Faire une demande au gouverneur</button>
+      <button class="btn" type="button" id="back1">Modifier mon mandat</button>
+    </div>
+  </section>
+
+  <!-- Étape 3 -->
+  <section id="step3" aria-labelledby="t3" hidden>
+    <div class="page-head">
+      <div class="where">Votre parcours : ouverture de compte, mandat, portefeuille simulé, <b>demandes</b>, bilan</div>
+      <h1 id="t3">Une demande</h1>
+      <p class="lead">Vous avez une envie qui sort du cadre ? Le gouverneur la compare à votre mandat avant toute simulation. Si elle enfreint une règle, il la refuse en chiffrant l'écart et propose le plus grand poids que le mandat permet.</p>
+    </div>
+
+    <div class="card">
+      <h2>Et si je voulais… ?</h2>
+      <div class="ask">
+        <div class="field">
+          <label for="ask-ticker">Un titre</label>
+          <select id="ask-ticker" data-testid="ask-ticker"></select>
+        </div>
+        <div class="field">
+          <label for="ask-weight">Part du portefeuille</label>
+          <div class="w-out"><output id="ask-out" for="ask-weight">50 %</output></div>
+          <input type="range" id="ask-weight" data-testid="ask-weight" min="1" max="90" step="1" value="50">
+        </div>
+      </div>
+      <div class="row" style="margin-top:18px">
+        <button class="btn primary" type="button" id="ask-go" data-testid="ask-submit">Soumettre au gouverneur</button>
+        <button class="btn dark" type="button" id="ask-robert" data-testid="try-robert">Essayer le cas de Robert : 50 % NVIDIA</button>
+        <span class="hint" id="ask-ctx"></span>
+      </div>
+      <div class="status" id="s3-status" role="status" aria-live="polite" style="margin-top:10px"></div>
+    </div>
+
+    <div id="verdict-zone" hidden>
+      <div class="verdict" id="verdict" data-testid="verdict"></div>
+      <div class="card" id="compare-card" data-testid="compare" hidden>
+        <h2>Le même parcours, sans et avec Verity</h2>
+        <div class="grid2" id="compare-body"></div>
+      </div>
+      <div class="grid2">
+        <div class="card"><h2>Ce que le mandat dit</h2><div id="viol"></div></div>
+        <div class="card"><h2>La contre-proposition</h2><div id="counter"></div></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h2>Le récit du gouverneur</h2>
+        <p class="narr-state" id="narr-state3"></p>
+        <div id="story3" data-testid="story-governor"></div>
+      </div>
+      <div class="card">
+        <h2>Quatre trajectoires comparées</h2>
+        <div id="chart-req" data-testid="chart-req" class="chart-wrap"></div>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="panels-title">Sous le capot</h2>
+
+  <details class="panel" id="panel-how" open>
+    <summary>Comment ça marche <small>Cinq agents, un seul principe : aucun nombre sans reçu</small></summary>
+    <div class="panel-body">
+      <p class="j-label"><span>Où Verity se place dans le parcours d'un client du courtier</span></p>
+      <ol class="journey" style="list-style:none;padding:0">
+        <li class="j-step">Ouverture de compte<small>chez le courtier</small></li>
+        <li class="j-step v">Mandat<small>Verity</small></li>
+        <li class="j-step v">Portefeuille simulé<small>Verity</small></li>
+        <li class="j-step v">Demandes<small>Verity</small></li>
+        <li class="j-step">Bilan<small>chez le courtier</small></li>
+      </ol>
+      <ol class="flow">
+        <li class="agent"><span class="step-no">Agent 1</span><b>Accueil</b><p>Lit votre récit et le traduit en règles chiffrées, que vous relisez avant toute simulation.</p></li>
+        <li class="agent"><span class="step-no">Agent 2</span><b>Constructeur</b><p>Bâtit un portefeuille qui respecte le mandat, avec les seules données connues à la date de décision.</p></li>
+        <li class="agent"><span class="step-no">Agent 3</span><b>Analyste</b><p>Calcule chaque fait avec deux programmes indépendants, A et B : un fait n'est retenu que si les deux concordent.</p></li>
+        <li class="agent"><span class="step-no">Agent 4</span><b>Narrateur</b><p>Claude rédige le récit, mais n'écrit jamais un nombre : il place des jetons qui renvoient à un fait.</p></li>
+        <li class="agent"><span class="step-no">Agent 5</span><b>Vérificateur</b><p>Relit chaque phrase et rejette tout nombre qui ne renvoie pas à un fait vérifié.</p></li>
+      </ol>
+      <div class="sidecars">
+        <div class="agent gov"><span class="step-no">Agent 6, à la demande</span><b>Gouverneur</b><p>Compare une demande de votre part à votre mandat, refuse en chiffrant l'écart et propose la plus grande part compatible.</p></div>
+        <div class="data-box"><b>Les données</b>Prix quotidiens de 31 actifs (actions, FNB, obligations, or, crypto) et taux de change USD/CAD. Chaque reçu indique l'empreinte des fichiers utilisés. Simulation uniquement : aucun ordre réel.</div>
+      </div>
+    </div>
+  </details>
+
+  <details class="panel" id="panel-journal">
+    <summary>Journal des agents <small>Ce que chaque agent a fait pour ce résultat</small></summary>
+    <div class="panel-body" id="journal"><p class="muted">Le journal apparaît après le premier calcul.</p></div>
+  </details>
+
+  <details class="panel" id="panel-data">
+    <summary>Données et limites <small>D'où viennent les chiffres, ce qu'ils ne disent pas</small></summary>
+    <div class="panel-body" id="data-panel"><p class="muted">Ces informations apparaissent après le premier calcul.</p></div>
+  </details>
+
+  <details class="panel" id="panel-verify">
+    <summary>Tester la vérification <small>Essayez de tromper le vérificateur</small></summary>
+    <div class="panel-body">
+      <p>Le vérificateur rejette toute phrase contenant un nombre qui ne renvoie pas à un fait calculé. Modifiez la phrase ci-dessous, ou essayez les deux exemples.</p>
+      <label for="verify-text" class="sr-only">Phrase à vérifier</label>
+      <input type="text" id="verify-text" data-testid="verify-input" value="Ce portefeuille a rendu +300 % sur la période." maxlength="300">
+      <div class="verify-row">
+        <button class="btn primary small" type="button" id="verify-go" data-testid="verify-submit">Vérifier cette phrase</button>
+        <button class="btn small" type="button" data-ex="Ce portefeuille a rendu +300 % sur la période." data-testid="verify-example-fake">Exemple : chiffre inventé</button>
+        <button class="btn small" type="button" data-ex="{{vol:p_trail}}" data-testid="verify-example-token">Exemple : jeton de fait</button>
+      </div>
+      <div id="verify-res" data-testid="verify-result" role="status" aria-live="polite"></div>
+      <p class="hint">Un jeton comme <code>{{vol:p_trail}}</code> désigne un fait calculé (ici la volatilité du portefeuille) : le vérificateur le remplace par sa valeur.</p>
+    </div>
+  </details>
+</main>
+
+<div class="sim-banner" role="note"><b>Simulation</b><span>Simulation uniquement — aucun ordre réel, aucun conseil financier personnalisé.</span></div>
+
+<div id="drawer-root"></div>
+</body>
+</html>

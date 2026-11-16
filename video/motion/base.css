@@ -1,0 +1,21 @@
+@font-face { font-family: "Nationale Sans"; src: url("../../web/assets/fonts/NationaleSans-regular.otf") format("opentype"); font-weight: 400; }
+@font-face { font-family: "Nationale Sans"; src: url("../../web/assets/fonts/NationaleSans-medium.otf") format("opentype"); font-weight: 500; }
+@font-face { font-family: "Nationale Sans"; src: url("../../web/assets/fonts/NationaleSans-bold.otf") format("opentype"); font-weight: 700; }
+:root { --bg:#f7fafb; --bg2:#eef7fb; --card:#fff; --ink:#151719; --slate:#365e7e; --muted:#5b7384; --line:#d6e4eb;
+  --blue:#1677b8; --blue-d:#126fb2; --blue-soft:#e3f1f9; --red:#c40023; --red-soft:#fdecef; --green:#2a7157; --green-soft:#e6f4ee; }
+* { box-sizing:border-box; margin:0; padding:0; }
+html,body { width:1920px; height:1080px; overflow:hidden; background:var(--bg); }
+body { font:400 32px/1.35 "Nationale Sans", Roboto, Arial, sans-serif; color:var(--ink); font-variant-numeric:tabular-nums; -webkit-font-smoothing:antialiased; }
+#stage { position:absolute; inset:0; width:1920px; height:1080px; overflow:hidden; background:var(--bg); }
+.abs { position:absolute; }
+.card { position:absolute; background:#fff; border:2px solid var(--line); border-radius:22px; box-shadow:0 2px 0 #00000008, 0 14px 40px #365e7e14; }
+.tag { display:inline-block; font-weight:500; font-size:26px; padding:4px 16px; border-radius:99px; background:var(--blue-soft); color:var(--blue-d); }
+.tag.red { background:var(--red-soft); color:var(--red); }
+.tag.green { background:var(--green-soft); color:var(--green); }
+.tag.gray { background:#eaeff2; color:var(--slate); }
+.lbl { font-size:24px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); font-weight:500; }
+.badge { display:inline-flex; align-items:center; gap:10px; background:var(--blue-soft); color:var(--blue-d); border:2px solid #9ccbe6; border-radius:12px; padding:0 14px; font-weight:700; }
+.badge svg { width:.8em; height:.8em; }
+.rcol { color:var(--red); }
+b, .b { font-weight:700; }
+.num { font-weight:700; }

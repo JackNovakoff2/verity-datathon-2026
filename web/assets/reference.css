@@ -1,0 +1,4262 @@
+/* Walkthrough reconstruction. Coordinates measured on the supplied 1920px film.
+   The browser's 110px chrome is excluded: application y=0 is source y=110. */
+@font-face {
+  font-family: Roboto;
+  src: url("/assets/fonts/Roboto-400.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: Roboto;
+  src: url("/assets/fonts/Roboto-500.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: Roboto;
+  src: url("/assets/fonts/Roboto-700.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+body.brokerage-mode {
+  background: #eef7fb;
+  color: #151719;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.35;
+}
+.brokerage-mode h1,
+.brokerage-mode h2,
+.brokerage-mode h3 {
+  font-family: Roboto, Arial, sans-serif;
+  color: #090b0d;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+.brokerage-mode h1 {
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0;
+}
+.brokerage-mode h2 {
+  font-size: 28px;
+  line-height: 1.25;
+  margin: 0 0 12px;
+}
+.brokerage-mode h3 {
+  font-size: 26px;
+  margin: 0 0 20px;
+}
+.brokerage-mode small {
+  font-size: 14px;
+  color: inherit;
+}
+.brokerage-mode button,
+.brokerage-mode input,
+.brokerage-mode select {
+  font-family: Roboto, Arial, sans-serif;
+}
+.brokerage-mode button {
+  border-radius: 4px;
+  border-color: #d4d8da;
+  color: #126fb2;
+  font-size: 16px;
+  font-weight: 400;
+}
+.brokerage-mode .positive {
+  color: #388b6c;
+}
+.brokerage-mode .negative {
+  color: #c40023;
+}
+.blue-text {
+  color: #1676b9;
+}
+.bank-header {
+  height: 90px;
+  padding: 0 max(24px, calc((100% - 1570px) / 2));
+  box-shadow: 0 3px 5px #00000017;
+  border: 0;
+}
+.bank-brand {
+  display: block;
+  line-height: 0;
+}
+.bank-brand img {
+  display: block;
+  width: 215px;
+  height: 80px;
+  object-fit: contain;
+}
+.bank-utilities {
+  gap: 15px;
+  margin-right: 0;
+}
+.bank-utilities > button:not(.user-chip) {
+  width: 43px;
+  height: 43px;
+  font-size: 12px;
+  color: #26333a;
+  border: 1px solid #202020;
+}
+.bank-utilities .user-chip {
+  height: 42px;
+  padding: 0 21px;
+  border: 1px solid #202020;
+  background: white;
+  color: #111;
+  font-size: 18px;
+  gap: 12px;
+  font-weight: 400;
+}
+.user-outline {
+  font-size: 23px;
+  color: #71808a;
+}
+.bank-utilities > button.logout {
+  border: 0 !important;
+  width: auto !important;
+  color: #bd0020 !important;
+  font-size: 18px !important;
+  white-space: nowrap;
+}
+.bank-page {
+  width: 82%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 0 4px;
+}
+.bank-toolbar {
+  height: 100px;
+  min-height: 100px;
+  display: flex;
+  align-items: end;
+  justify-content: start;
+  border-color: #d7e2e8;
+  position: relative;
+}
+.bank-actions {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  gap: 10px;
+  align-items: center;
+  display: flex;
+}
+.bank-actions button {
+  padding: 3px 22px;
+  border-radius: 20px;
+  border: 1px solid #006dbb;
+  height: 31px;
+  font-size: 18px;
+  line-height: 22px;
+  background: transparent;
+  color: #126fb2;
+}
+.bank-actions .sell {
+  color: #bd0020;
+  border-color: #bd0020;
+}
+.bank-actions [data-action="transfer"] {
+  color: #16191b;
+  border-color: #52595d;
+}
+.bank-actions .blue,
+.brokerage-mode button.blue {
+  color: white;
+  background: #1576bb;
+  border-color: #1576bb;
+}
+.bank-actions [data-action="search"] {
+  padding: 3px 22px;
+  min-width: 165px;
+}
+.bank-actions [data-action="tools"] {
+  color: #111;
+  border: 0;
+  padding-left: 20px;
+  padding-right: 0;
+}
+.search-symbol {
+  width: 13px;
+  height: 13px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  display: inline-block;
+  margin-left: 10px;
+  position: relative;
+}
+.search-symbol:after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 1px;
+  background: currentColor;
+  transform: rotate(50deg);
+  right: -5px;
+  bottom: -3px;
+}
+.bank-nav {
+  display: flex;
+  height: 55px;
+  gap: 0;
+}
+.bank-nav button {
+  font-size: 20px;
+  padding: 12px 22px 16px;
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  color: #000;
+  min-width: 145px;
+  text-align: left;
+}
+.bank-nav button.active {
+  color: #126fb2;
+  border-bottom-color: #1478ba;
+}
+.bank-nav button:hover {
+  background: #e7f3f9;
+}
+.bank-dropdown {
+  z-index: 20;
+  position: absolute;
+  top: 190px;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  box-shadow: 0 3px 8px #0003;
+  min-width: 180px;
+  border: 1px solid #c9dce5;
+}
+.bank-dropdown button {
+  display: block;
+  border: 0;
+  border-radius: 0;
+  padding: 18px 20px;
+  width: 100%;
+  text-align: left;
+  font-size: 16px;
+  color: #30353a;
+}
+.bank-dropdown button:hover {
+  background: #eff8fc;
+}
+.bank-heading {
+  min-height: 94px;
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  margin: 0;
+  padding: 20px 0 22px;
+  flex-wrap: wrap;
+}
+.bank-heading .account-selector {
+  height: 50px;
+  width: 312px;
+  background: white;
+  border: 1px solid #d4d8dc;
+  border-radius: 6px;
+  font-size: 20px;
+  padding: 10px 16px;
+  color: #111;
+}
+.reference-time {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 14px;
+  color: #242b30;
+}
+.reference-time small {
+  display: block;
+  font-size: 14px;
+}
+.refresh-symbol {
+  font-size: 48px;
+  color: #1379bb;
+  line-height: 1;
+  font-family: Arial, sans-serif;
+}
+.bank-heading .view-selector {
+  margin-left: auto;
+  height: 50px;
+  width: 212px;
+  font-size: 20px;
+  background: #fff;
+  color: #151719;
+  border-color: #d4d8dc;
+}
+.bank-context {
+  font-size: 12px;
+  gap: 8px;
+}
+.bank-context select {
+  padding: 5px 9px;
+  font-size: 14px;
+}
+.bank-context label {
+  color: #526b77;
+}
+.bank-card {
+  background: #fff;
+  border: 0;
+  border-radius: 7px;
+  padding: 30px;
+  margin: 0 0 20px;
+  box-shadow: none;
+}
+.total-card.reference-total {
+  height: 114px;
+  margin-bottom: 12px;
+  padding: 22px 30px;
+  display: flex;
+  justify-content: start;
+  gap: 24px;
+  align-items: center;
+}
+.reference-total > div:first-child {
+  flex: 0 0 auto;
+}
+.reference-total span {
+  display: block;
+  color: #365e7e;
+  font-size: 18px;
+}
+.reference-total strong {
+  font-size: 44px;
+  line-height: 1.1;
+  font-weight: 500;
+  color: #222;
+}
+.reference-total p {
+  font-size: 30px;
+  margin: 2px 0 0;
+}
+.reference-total button {
+  margin-left: auto;
+  border: 0;
+  font-size: 18px;
+  padding: 0;
+  background: transparent;
+}
+.reference-accounts {
+  padding: 30px 30px 20px;
+  min-height: 472px;
+}
+.reference-accounts .account-details {
+  display: grid;
+  grid-template-columns: 1.25fr 1.25fr 1.25fr 0.9fr 0.8fr;
+  gap: 20px;
+  align-items: start;
+  padding: 0 0 24px;
+  margin: 0 0 30px;
+  border-bottom: 2px solid #ddd;
+}
+.reference-accounts .account-details h2 {
+  font-size: 28px;
+  margin: 3px 0 2px;
+}
+.reference-accounts .account-details > div > span {
+  font-size: 18px;
+  color: #365e7e;
+  display: block;
+}
+.reference-accounts .account-details > div:first-child > span {
+  font-size: 22px;
+  color: #111;
+}
+.reference-accounts .account-details b {
+  display: block;
+  font-size: 22px;
+  line-height: 1.2;
+  font-weight: 400;
+  color: #111;
+}
+.reference-accounts .account-details small {
+  display: block;
+  font-size: 14px;
+  color: #111;
+}
+.reference-accounts .account-details select {
+  height: 50px;
+  font-size: 20px;
+  color: #111;
+  background: #fff;
+  border: 1px solid #d9dfe2;
+}
+.reference-accounts .text-link {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font-size: 14px;
+  text-decoration: underline;
+  display: block;
+}
+.brokerage-mode table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #111;
+  font-size: 14px;
+}
+.brokerage-mode th {
+  background: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  color: #365e7e;
+  border-bottom: 2px solid #f4f6fc;
+  padding: 5px 8px 7px;
+  text-align: right;
+  white-space: nowrap;
+}
+.brokerage-mode td {
+  padding: 8px;
+  border-bottom: 2px solid #e4e4e4;
+  text-align: right;
+  font-size: 14px;
+  line-height: 1.3;
+}
+.brokerage-mode th:first-child,
+.brokerage-mode td:first-child {
+  text-align: left;
+}
+.reference-account-table td:first-child {
+  width: 21%;
+}
+.reference-account-table .account-link {
+  color: #111;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-size: 14px;
+}
+.account-link em {
+  font-style: normal;
+  color: #0073be;
+  font-size: 22px;
+  vertical-align: -1px;
+}
+.reference-account-table tfoot td {
+  border: 0;
+  font-weight: 500;
+  padding-top: 10px;
+}
+.reference-rate {
+  font-size: 14px;
+  margin-top: 14px;
+}
+.reference-rate span {
+  color: #1577ba;
+}
+.info-plus {
+  font-size: 22px;
+  color: #1577ba;
+  font-weight: 400;
+}
+.reference-accounts .card-footer {
+  border: 0;
+  margin: 20px 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+}
+.reference-accounts .card-footer button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 16px;
+}
+.standalone-mockup #broker-inspect {
+  font-size: 12px;
+  color: #6e8997;
+}
+.reference-notice {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 9;
+  font-size: 10px;
+  background: #eef7fbde;
+  color: #527082;
+  padding: 2px 7px;
+  line-height: 14px;
+}
+.bank-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  border: 0;
+  padding: 0 0 35px;
+  color: #111;
+  font-size: 12px;
+}
+.bank-footer > span:last-child {
+  display: flex;
+  align-items: center;
+  white-space: normal;
+}
+.bank-footer img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  object-position: left;
+  margin-left: 10px;
+}
+.bank-chat {
+  position: fixed;
+  right: 45px;
+  bottom: 26px;
+  border: 0 !important;
+  border-radius: 50% !important;
+  width: 72px;
+  height: 72px;
+  background: #1478be !important;
+  color: white !important;
+  font-size: 38px !important;
+  line-height: 1;
+  padding: 0 !important;
+  box-shadow: 0 1px 8px #0003;
+  z-index: 10;
+}
+.bank-chat span {
+  position: absolute;
+  font-size: 40px;
+  right: 12px;
+  bottom: 13px;
+  color: #adc7d7;
+}
+.reference-quote {
+  padding: 28px 30px 0;
+  border-radius: 7px;
+}
+.reference-quote .quote-heading {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #d5d9db;
+  padding: 0 0 20px;
+  gap: 12px;
+  align-items: start;
+}
+.reference-quote .quote-main {
+  min-width: 0;
+  flex: 1;
+}
+.reference-quote .quote-main h2 {
+  font-size: 36px;
+  line-height: 1.2;
+  margin: 0 0 12px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+}
+.country-flag {
+  font-size: 34px !important;
+}
+.quote-summary {
+  display: flex;
+  align-items: start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.quote-summary > div {
+  min-width: 0;
+  flex: none;
+}
+.quote-summary span {
+  font-size: 14px;
+  color: #365e7e;
+  display: block;
+}
+.quote-summary strong {
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 400;
+  display: block;
+  white-space: nowrap;
+}
+.quote-summary .quote-rating {
+  border-left: 1px solid #ddd;
+  padding-left: 20px;
+  max-width: 205px;
+}
+.quote-rating span {
+  font-size: 13px;
+}
+.quote-rating b {
+  font-weight: 400;
+  font-size: 16px;
+  display: block;
+}
+.quote-rating small {
+  font-size: 13px;
+  display: block;
+  color: #365e7e;
+}
+.technical-rating b {
+  display: flex;
+  gap: 6px;
+}
+.technical-rating i {
+  font-size: 13px;
+  border: 1px solid #43a33a;
+  font-style: normal;
+  color: #43a33a;
+  padding: 0 3px;
+  line-height: 15px;
+  margin-top: 3px;
+}
+.technical-rating i + i {
+  color: #c40023;
+  border-color: #c40023;
+}
+.quote-source-time {
+  display: block;
+  margin-top: 16px;
+  font-size: 12px !important;
+  color: #365e7e !important;
+}
+.reference-quote .quote-actions {
+  flex: none;
+  display: flex;
+  align-items: end;
+  flex-direction: column;
+  gap: 4px;
+  width: 188px;
+  margin: 0;
+}
+.reference-quote .quote-actions > div {
+  display: flex;
+  gap: 10px;
+  margin: 0 0 7px;
+}
+.reference-quote .quote-actions button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 18px;
+  color: #3983b2;
+}
+.reference-quote .quote-actions > div button {
+  width: 110px;
+  padding: 5px 16px;
+  border-radius: 24px;
+  color: white;
+  background: #1478bb;
+  font-size: 18px;
+}
+.reference-quote .quote-actions > div .sell {
+  background: #c40023;
+}
+.quote-facts.reference-facts {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
+  padding: 40px 0 22px;
+  border-bottom: 1px solid #d3d6d8;
+  margin: 0;
+}
+.reference-facts h3 {
+  font-size: 36px;
+  margin: 0 0 20px;
+}
+.quote-fact-columns {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+}
+.quote-fact-columns dl {
+  display: block;
+  flex: 1;
+  border-left: 1px solid #d6d6d6;
+  margin: 0;
+  padding: 0 12px;
+  min-width: 0;
+}
+.quote-fact-columns dl:first-child {
+  border: 0;
+  padding-left: 0;
+}
+.quote-fact-columns dl div {
+  padding: 0 0 12px;
+  display: block;
+}
+.quote-fact-columns dt {
+  font-size: 14px;
+  color: #888;
+  margin: 0 0 3px;
+}
+.quote-fact-columns dd {
+  font-size: 24px;
+  color: #222;
+  line-height: 1.2;
+  margin: 0;
+  white-space: normal;
+}
+.dividend-facts dl {
+  flex: 1;
+}
+.reference-facts .dividend-facts {
+  padding: 0;
+  border: 0;
+}
+.reference-facts .dividend-facts dd {
+  font-size: 23px;
+}
+.bank-subnav.quote-tabs {
+  display: flex;
+  gap: 3px;
+  margin: 20px 0 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+}
+.quote-tabs button {
+  font-size: 16px;
+  line-height: 20px;
+  padding: 16px 4px;
+  flex: 1;
+  background: #dbeef5;
+  border: 0;
+  color: #0d1114;
+  border-radius: 6px 6px 0 0;
+  min-width: 0;
+  white-space: nowrap;
+}
+.quote-tabs button[aria-pressed="true"] {
+  background: #fff;
+  color: #236a9e;
+}
+#quote-tab-content {
+  padding: 20px 0 30px;
+}
+.reference-analysis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 35px;
+  padding: 10px 0;
+}
+.reference-analysis article {
+  padding: 0 20px;
+  border-right: 1px solid #eee;
+}
+.reference-analysis article:last-child {
+  border: 0;
+}
+.reference-analysis h3 {
+  font-size: 28px;
+}
+.reference-analysis a {
+  font-size: 13px;
+  color: #4384a8;
+}
+.reference-analysis dl {
+  font-size: 16px;
+  line-height: 1.7;
+}
+.reference-analysis dd {
+  margin: 0;
+}
+.morningstar {
+  color: #c40023;
+}
+.rating-bar {
+  display: flex;
+  gap: 8px;
+  font-size: 14px;
+  margin: 10px 0;
+}
+.rating-bar span {
+  display: block;
+  width: 90px;
+  height: 12px;
+  background: #858d95;
+}
+.signal-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  padding: 30px 0;
+}
+.signal-grid > article,
+.signal-grid > div {
+  flex: 1;
+}
+.signal-grid strong {
+  display: block;
+  font-size: 32px;
+}
+.reference-markets {
+  padding: 28px 30px;
+}
+.reference-markets h2 {
+  font-size: 36px;
+  margin: 0 0 10px;
+}
+.market-filters {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.market-filters label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 18px;
+}
+.market-filters input {
+  accent-color: #1578ba;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+.reference-markets .market-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.reference-markets .market-grid article {
+  border: 1px solid #d5d5d5;
+  border-radius: 8px;
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+  height: 160px;
+}
+.market-grid article > span:first-child {
+  font-size: 18px;
+  color: #111;
+  display: block;
+}
+.reference-markets .market-grid strong {
+  font-size: 25px;
+  color: #111;
+  font-weight: 400;
+  display: block;
+}
+.market-percent {
+  position: absolute;
+  right: 22px;
+  top: 24px;
+  border: 1px solid currentColor;
+  border-radius: 25px;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+.index-bottom {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+.index-bottom > b {
+  font-size: 18px;
+  font-weight: 500;
+  flex: none;
+}
+.sparkline {
+  width: 100%;
+  height: 65px;
+  min-width: 0;
+}
+.top-movers-heading {
+  display: flex;
+  align-items: center;
+  border-top: 2px solid #ddd;
+  margin-top: 35px;
+  padding-top: 25px;
+}
+.top-movers-heading button:first-of-type {
+  margin-left: auto;
+}
+.top-movers-heading button {
+  border: 0;
+}
+.reference-markets + .bank-card {
+  margin-top: 0;
+}
+.bank-subnav:not(.quote-tabs) {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  gap: 3px;
+}
+.bank-subnav:not(.quote-tabs) button {
+  background: #dceef5;
+  color: #111;
+  border: 0;
+  border-radius: 6px 6px 0 0;
+  padding: 16px 30px;
+  font-size: 18px;
+}
+.bank-subnav:not(.quote-tabs) button[aria-pressed="true"] {
+  background: #fff;
+  color: #166da8;
+}
+.reference-lists h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+.reference-lists h2 small {
+  font-size: 18px;
+  margin-left: 18px;
+}
+.reference-lists .blue {
+  border-radius: 24px;
+  font-size: 18px;
+  padding: 8px 40px;
+}
+.reference-watchlist {
+  margin-top: 38px;
+}
+.reference-watchlist .card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.reference-watchlist .card-title h2 {
+  font-size: 24px;
+  margin: 0;
+}
+.reference-watchlist .card-title button {
+  padding: 3px 8px;
+  border: 0;
+  font-size: 15px;
+  background: transparent;
+}
+.reference-watchlist .card-title small {
+  font-size: 18px;
+  margin-left: 18px;
+}
+.reference-watchlist td {
+  font-size: 14px;
+  padding: 10px 5px;
+}
+.reference-watchlist th {
+  font-size: 13px;
+}
+.reference-watchlist td:nth-child(2) {
+  text-align: left;
+  max-width: 255px;
+}
+.reference-watchlist td:first-child {
+  font-size: 24px;
+  width: 30px;
+}
+.reference-watchlist td button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 16px;
+  color: #111;
+}
+.reference-watchlist td small {
+  font-size: 12px;
+  display: block;
+  color: #365e7e;
+}
+.reference-watchlist td .tiny-buy {
+  padding: 3px 18px;
+  border: 1px solid #1477b5;
+  border-radius: 20px;
+  color: #1477b5;
+  font-size: 15px;
+}
+.reference-watchlist td .sell {
+  border-color: #bc0024;
+  color: #bc0024;
+}
+.reference-profile {
+  border-radius: 0;
+  padding: 30px 20px;
+}
+.profile-intro {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+  padding: 40px;
+  background: #edf6f9;
+  min-height: 235px;
+  margin: 0 0 65px;
+}
+.profile-intro h2 {
+  font-size: 32px;
+  margin: 0 0 12px;
+}
+.profile-intro p {
+  font-size: 18px;
+  margin: 0;
+}
+.profile-line-icon {
+  font-size: 100px;
+  line-height: 1;
+  position: relative;
+  color: #2a5468;
+  width: 155px;
+  text-align: center;
+  flex: none;
+  font-weight: 400;
+}
+.profile-line-icon i {
+  font-size: 50px;
+  position: absolute;
+  right: -10px;
+  bottom: -10px;
+  background: #edf6f9;
+  border-radius: 50%;
+  font-style: normal;
+}
+.preference-rows {
+  padding: 0 18px 12px;
+}
+.preference-rows details {
+  border-bottom: 1px solid #d6dfe3;
+  margin: 0;
+}
+.preference-rows summary {
+  font-size: 20px;
+  color: #477e9e;
+  list-style: none;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.preference-rows summary span {
+  font-size: 36px;
+  line-height: 24px;
+}
+.preference-rows details[open] summary span {
+  transform: rotate(45deg);
+}
+.preference-rows details > div {
+  padding: 15px 0 25px;
+}
+.preference-rows label {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+.preference-rows select {
+  margin-left: 20px;
+}
+.brokerage-mode #broker-action-dialog {
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 5px 25px #0003;
+  max-width: 760px;
+  width: 90vw;
+  padding: 30px;
+}
+.brokerage-mode #broker-action-dialog::backdrop {
+  background: #ffffffa8;
+  backdrop-filter: blur(2px);
+}
+@media (max-width: 1500px) and (min-width: 701px) {
+  .brokerage-mode {
+    font-size: 14px;
+  }
+  .bank-header {
+    height: 74px;
+  }
+  .bank-brand img {
+    width: 175px;
+    height: 65px;
+  }
+  .bank-utilities > button:not(.user-chip) {
+    width: 34px;
+    height: 34px;
+  }
+  .bank-utilities .user-chip {
+    height: 34px;
+    font-size: 14px;
+    padding: 0 16px;
+  }
+  .bank-utilities > button.logout {
+    font-size: 14px !important;
+  }
+  .bank-toolbar {
+    height: 83px;
+    min-height: 83px;
+  }
+  .bank-actions {
+    top: 12px;
+    gap: 8px;
+  }
+  .bank-actions button {
+    font-size: 14px;
+    height: 26px;
+    line-height: 18px;
+    padding: 2px 16px;
+  }
+  .bank-actions [data-action="search"] {
+    min-width: 130px;
+  }
+  .bank-nav {
+    height: 45px;
+  }
+  .bank-nav button {
+    min-width: 108px;
+    font-size: 16px;
+    padding: 10px 17px 12px;
+  }
+  .bank-dropdown {
+    top: 157px;
+  }
+  .bank-heading {
+    min-height: 78px;
+    padding: 16px 0;
+    gap: 22px;
+  }
+  .brokerage-mode h1 {
+    font-size: 36px;
+  }
+  .bank-heading .account-selector {
+    width: 250px;
+    height: 40px;
+    font-size: 16px;
+  }
+  .bank-heading .view-selector {
+    height: 40px;
+    width: 170px;
+    font-size: 16px;
+  }
+  .reference-time,
+  .reference-time small {
+    font-size: 11px;
+  }
+  .refresh-symbol {
+    font-size: 38px;
+  }
+  .reference-total strong {
+    font-size: 36px;
+  }
+  .total-card.reference-total {
+    height: 92px;
+    padding: 17px 24px;
+    gap: 20px;
+  }
+  .reference-total span {
+    font-size: 14px;
+  }
+  .reference-total p {
+    font-size: 24px;
+  }
+  .reference-total button {
+    font-size: 14px;
+  }
+  .reference-accounts {
+    padding: 24px;
+    min-height: 380px;
+  }
+  .reference-accounts .account-details {
+    gap: 15px;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+  }
+  .reference-accounts .account-details h2 {
+    font-size: 22px;
+  }
+  .reference-accounts .account-details > div > span {
+    font-size: 14px;
+  }
+  .reference-accounts .account-details > div:first-child > span {
+    font-size: 18px;
+  }
+  .reference-accounts .account-details b {
+    font-size: 18px;
+  }
+  .reference-accounts .account-details small,
+  .reference-accounts .text-link {
+    font-size: 11px;
+  }
+  .reference-accounts .account-details select {
+    height: 40px;
+    font-size: 16px;
+  }
+  .brokerage-mode th,
+  .brokerage-mode td,
+  .reference-account-table .account-link {
+    font-size: 11px;
+  }
+  .brokerage-mode td {
+    padding: 6px;
+  }
+  .reference-rate {
+    font-size: 11px;
+  }
+  .reference-quote {
+    padding: 22px 24px 0;
+  }
+  .reference-quote .quote-main h2 {
+    font-size: 29px;
+  }
+  .quote-summary {
+    gap: 13px;
+  }
+  .quote-summary strong {
+    font-size: 19px;
+  }
+  .quote-summary span {
+    font-size: 11px;
+  }
+  .quote-summary .quote-rating {
+    padding-left: 13px;
+  }
+  .quote-rating span {
+    font-size: 10px;
+  }
+  .quote-rating b {
+    font-size: 13px;
+  }
+  .quote-rating small {
+    font-size: 10px;
+  }
+  .reference-quote .quote-actions {
+    width: 160px;
+  }
+  .reference-quote .quote-actions > div button {
+    width: 85px;
+    font-size: 14px;
+  }
+  .reference-quote .quote-actions button {
+    font-size: 14px;
+  }
+  .reference-facts h3 {
+    font-size: 29px;
+  }
+  .quote-fact-columns dt {
+    font-size: 11px;
+  }
+  .quote-fact-columns dd,
+  .reference-facts .dividend-facts dd {
+    font-size: 18px;
+  }
+  .quote-facts.reference-facts {
+    padding: 30px 0 18px;
+    gap: 14px;
+  }
+  .quote-fact-columns dl {
+    padding: 0 10px;
+  }
+  .quote-tabs button {
+    font-size: 13px;
+    padding: 12px 3px;
+  }
+  .reference-markets h2 {
+    font-size: 29px;
+  }
+  .market-filters label {
+    font-size: 14px;
+  }
+  .reference-markets .market-grid article {
+    height: 128px;
+    padding: 17px;
+  }
+  .reference-markets .market-grid strong {
+    font-size: 20px;
+  }
+  .market-grid article > span:first-child {
+    font-size: 14px;
+  }
+  .market-percent {
+    font-size: 12px;
+    right: 16px;
+    top: 18px;
+  }
+  .index-bottom > b {
+    font-size: 14px;
+  }
+  .reference-markets .market-grid {
+    gap: 16px;
+  }
+  .bank-chat {
+    width: 58px;
+    height: 58px;
+    right: 35px;
+    bottom: 22px;
+  }
+  .reference-profile {
+    padding: 24px 16px;
+  }
+  .profile-intro {
+    padding: 32px;
+    min-height: 188px;
+    gap: 36px;
+    margin-bottom: 52px;
+  }
+  .profile-intro h2 {
+    font-size: 26px;
+  }
+  .profile-intro p {
+    font-size: 14px;
+  }
+  .profile-line-icon {
+    font-size: 80px;
+    width: 124px;
+  }
+  .preference-rows summary {
+    font-size: 16px;
+    padding: 16px 0;
+  }
+  .bank-subnav:not(.quote-tabs) button {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
+@media (max-width: 700px) {
+  body.brokerage-mode {
+    font-size: 13px;
+  }
+  .bank-header {
+    height: 65px;
+    padding: 0 16px;
+  }
+  .bank-brand img {
+    width: 135px;
+    height: 52px;
+  }
+  .bank-utilities {
+    gap: 7px;
+  }
+  .bank-utilities > button:not(.user-chip) {
+    width: 26px;
+    height: 26px;
+    font-size: 9px;
+  }
+  .bank-utilities .user-chip {
+    height: 28px;
+    max-width: 88px;
+    font-size: 9px;
+    padding: 0 7px;
+    gap: 3px;
+  }
+  .user-outline {
+    font-size: 15px;
+  }
+  .bank-utilities > button.logout {
+    display: none;
+  }
+  .bank-page {
+    width: 100%;
+    padding: 0 12px;
+  }
+  .bank-toolbar {
+    height: 100px;
+    min-height: 100px;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+  }
+  .bank-actions {
+    top: 12px;
+    left: 0;
+    right: 0;
+    justify-content: space-between;
+    gap: 4px;
+  }
+  .bank-actions button {
+    font-size: 12px;
+    padding: 2px 10px;
+    height: 27px;
+    line-height: 20px;
+  }
+  .bank-actions [data-action="search"] {
+    min-width: 100px;
+    padding: 2px 10px;
+  }
+  .bank-actions [data-action="tools"] {
+    padding-left: 0;
+    font-size: 10px;
+  }
+  .search-symbol {
+    width: 9px;
+    height: 9px;
+    margin-left: 3px;
+  }
+  .bank-nav {
+    height: 45px;
+    width: 100%;
+    margin-top: auto;
+    justify-content: space-between;
+  }
+  .bank-nav button {
+    min-width: 0;
+    font-size: 12px;
+    padding: 12px 4px;
+    flex: 1;
+    text-align: center;
+  }
+  .bank-heading {
+    gap: 12px;
+    padding: 18px 0;
+    min-height: 0;
+    align-items: center;
+  }
+  .brokerage-mode h1 {
+    font-size: 28px;
+  }
+  .bank-heading .account-selector {
+    font-size: 12px;
+    width: 155px;
+    height: 34px;
+    padding: 5px 8px;
+  }
+  .reference-time {
+    font-size: 9px;
+    gap: 8px;
+  }
+  .reference-time small {
+    font-size: 9px;
+  }
+  .refresh-symbol {
+    font-size: 25px;
+  }
+  .bank-heading .view-selector {
+    display: none;
+  }
+  .bank-context {
+    margin-left: auto;
+  }
+  .bank-context select {
+    font-size: 11px;
+    max-width: 100px;
+  }
+  .bank-dropdown {
+    top: 165px;
+    max-width: calc(100vw - 24px);
+  }
+  .bank-dropdown button {
+    font-size: 13px;
+    padding: 14px;
+  }
+  .bank-card {
+    padding: 16px;
+    border-radius: 5px;
+  }
+  .total-card.reference-total {
+    height: 85px;
+    padding: 14px 16px;
+    gap: 14px;
+  }
+  .reference-total span {
+    font-size: 11px;
+  }
+  .reference-total strong {
+    font-size: 30px;
+  }
+  .reference-total p {
+    font-size: 17px;
+  }
+  .reference-total button {
+    font-size: 11px;
+  }
+  .reference-accounts {
+    padding: 16px;
+    min-height: 0;
+  }
+  .reference-accounts .account-details {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+  }
+  .reference-accounts .account-details h2 {
+    font-size: 17px;
+  }
+  .reference-accounts .account-details > div > span {
+    font-size: 11px;
+  }
+  .reference-accounts .account-details > div:first-child > span {
+    font-size: 13px;
+  }
+  .reference-accounts .account-details b {
+    font-size: 16px;
+  }
+  .reference-accounts .account-details small {
+    font-size: 10px;
+  }
+  .reference-accounts .account-details select {
+    height: 34px;
+    font-size: 13px;
+    grid-column: 1 / -1;
+  }
+  .reference-account-table {
+    min-width: 700px;
+  }
+  .brokerage-mode th,
+  .brokerage-mode td {
+    font-size: 11px;
+    padding: 6px;
+  }
+  .reference-account-table .account-link {
+    font-size: 11px;
+  }
+  .reference-rate {
+    font-size: 11px;
+  }
+  .reference-accounts .card-footer button {
+    font-size: 12px;
+  }
+  .reference-accounts .card-footer {
+    gap: 10px;
+    margin-top: 15px;
+  }
+  .bank-footer {
+    margin-top: 25px;
+    font-size: 9px;
+    gap: 18px;
+    align-items: start;
+  }
+  .bank-chat {
+    width: 44px;
+    height: 44px;
+    right: 14px;
+    bottom: 25px;
+    font-size: 26px !important;
+  }
+  .bank-chat span {
+    font-size: 24px;
+    right: 7px;
+    bottom: 8px;
+  }
+  .reference-notice {
+    font-size: 8px;
+  }
+  .reference-quote {
+    padding: 16px;
+  }
+  .reference-quote .quote-heading {
+    display: block;
+  }
+  .reference-quote .quote-main h2 {
+    font-size: 24px;
+    letter-spacing: 0;
+  }
+  .country-flag {
+    font-size: 22px !important;
+  }
+  .quote-summary {
+    gap: 12px;
+  }
+  .quote-summary strong {
+    font-size: 19px;
+  }
+  .quote-summary span {
+    font-size: 11px;
+  }
+  .quote-summary .quote-rating {
+    padding-left: 12px;
+    max-width: 130px;
+  }
+  .quote-rating span {
+    font-size: 10px;
+  }
+  .quote-rating b {
+    font-size: 13px;
+  }
+  .quote-rating small {
+    font-size: 10px;
+  }
+  .reference-quote .quote-actions {
+    margin-top: 16px;
+    width: 100%;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .reference-quote .quote-actions > div {
+    margin: 0;
+  }
+  .reference-quote .quote-actions > div button {
+    width: 64px;
+    font-size: 12px;
+  }
+  .reference-quote .quote-actions button {
+    font-size: 11px;
+  }
+  .quote-facts.reference-facts {
+    grid-template-columns: 1fr;
+    padding: 20px 0;
+    gap: 20px;
+  }
+  .reference-facts h3 {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+  .quote-fact-columns {
+    flex-wrap: wrap;
+    row-gap: 18px;
+  }
+  .quote-fact-columns dl {
+    flex: 1 0 30%;
+    padding: 0 8px;
+  }
+  .quote-fact-columns dl:nth-child(4) {
+    padding-left: 0;
+    border: 0;
+  }
+  .quote-fact-columns dt {
+    font-size: 10px;
+  }
+  .quote-fact-columns dd,
+  .reference-facts .dividend-facts dd {
+    font-size: 16px;
+  }
+  .quote-fact-columns dl div {
+    padding-bottom: 10px;
+  }
+  .reference-facts .dividend-facts .quote-fact-columns dl {
+    flex: 1;
+  }
+  .bank-subnav.quote-tabs {
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .quote-tabs button {
+    font-size: 11px;
+    flex: 1 0 25%;
+    padding: 10px 5px;
+  }
+  .reference-analysis {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .reference-analysis article {
+    padding: 0;
+    border: 0;
+  }
+  .reference-analysis h3 {
+    font-size: 22px;
+  }
+  .signal-grid {
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .signal-grid > article {
+    flex: 1 0 35%;
+  }
+  .reference-markets {
+    padding: 16px;
+  }
+  .reference-markets h2 {
+    font-size: 26px;
+  }
+  .market-filters {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .market-filters label {
+    font-size: 11px;
+  }
+  .market-filters input {
+    width: 13px;
+    height: 13px;
+  }
+  .reference-markets .market-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .reference-markets .market-grid article {
+    height: 125px;
+    padding: 16px;
+  }
+  .market-percent {
+    font-size: 13px;
+    right: 16px;
+    top: 18px;
+  }
+  .reference-markets .market-grid strong {
+    font-size: 24px;
+  }
+  .market-grid article > span:first-child {
+    font-size: 14px;
+  }
+  .index-bottom > b {
+    font-size: 14px;
+  }
+  .reference-lists h2 {
+    font-size: 26px;
+  }
+  .reference-lists h2 small {
+    font-size: 12px;
+  }
+  .reference-lists .blue {
+    font-size: 13px;
+    padding: 7px 20px;
+  }
+  .reference-watchlist {
+    padding: 16px;
+    margin-top: 20px;
+  }
+  .reference-watchlist .card-title {
+    display: block;
+  }
+  .reference-watchlist .card-title h2 {
+    font-size: 17px;
+    margin-bottom: 15px;
+  }
+  .reference-watchlist table {
+    min-width: 1000px;
+  }
+  .reference-watchlist .card-title small {
+    font-size: 12px;
+  }
+  .reference-profile {
+    padding: 12px;
+  }
+  .bank-subnav:not(.quote-tabs) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .bank-subnav:not(.quote-tabs) button {
+    font-size: 11px;
+    padding: 10px 8px;
+    flex: auto;
+  }
+  .profile-intro {
+    padding: 20px;
+    gap: 15px;
+    min-height: 150px;
+    margin-bottom: 25px;
+  }
+  .profile-line-icon {
+    font-size: 50px;
+    width: 60px;
+  }
+  .profile-line-icon i {
+    font-size: 25px;
+  }
+  .profile-intro h2 {
+    font-size: 21px;
+  }
+  .profile-intro p {
+    font-size: 12px;
+  }
+  .preference-rows {
+    padding: 0 6px;
+  }
+  .preference-rows summary {
+    font-size: 13px;
+    padding: 15px 0;
+  }
+  .preference-rows summary span {
+    font-size: 26px;
+  }
+  .preference-rows label {
+    font-size: 12px;
+    display: block;
+  }
+  .preference-rows select {
+    margin: 8px 0;
+  }
+  .reference-profile h4 {
+    font-size: 14px;
+  }
+  .reference-profile p {
+    font-size: 12px;
+  }
+  .lens-entry {
+    padding: 14px 10px;
+    margin: 14px 0;
+  }
+  .lens-entry h3 {
+    font-size: 16px;
+  }
+  .integration-ticker {
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .integration-ticker select {
+    font-size: 12px;
+    padding: 5px;
+  }
+  .lens-entry button {
+    font-size: 14px !important;
+  }
+}
+/* Coordinate corrections after native-size comparison. */
+.bank-nav {
+  align-self: flex-end;
+  align-items: stretch;
+}
+.bank-heading {
+  justify-content: flex-start;
+}
+.bank-page {
+  width: 81.2%;
+  margin-left: 8.9%;
+  margin-right: 0;
+}
+.bank-header {
+  padding-left: max(24px, calc((100% - 1578px) / 2));
+  padding-right: max(24px, calc((100% - 1536px) / 2));
+}
+.reference-total > div:first-child > span {
+  font-size: 18px;
+  color: #365e7e;
+}
+.reference-accounts .account-details h2 {
+  font-weight: 500;
+}
+.reference-account-table .account-link {
+  line-height: 18px;
+  height: 18px;
+}
+.reference-account-table .account-link em {
+  font-size: 18px;
+  line-height: 18px;
+  vertical-align: 0;
+}
+.reference-account-table td {
+  height: 36px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.reference-account-table th {
+  padding-top: 5px;
+  padding-bottom: 7px;
+}
+.reference-accounts .account-details {
+  padding-bottom: 24px;
+  margin-bottom: 28px;
+}
+.quote-fact-columns dl:nth-child(1) {
+  flex: 0.9;
+}
+.quote-fact-columns dl:nth-child(2) {
+  flex: 0.8;
+}
+.quote-fact-columns dl:nth-child(3) {
+  flex: 1.7;
+}
+.quote-fact-columns dl:nth-child(4) {
+  flex: 1.6;
+}
+.quote-fact-columns dl:nth-child(5) {
+  flex: 0.9;
+}
+.quote-fact-columns dl:nth-child(6) {
+  flex: 0.8;
+}
+.reference-facts .dividend-facts dl {
+  flex: 1;
+}
+.info-icon {
+  font:
+    12px/16px Arial,
+    sans-serif !important;
+  display: inline-block !important;
+  width: 17px;
+  height: 17px;
+  border: 1px solid #1377ba;
+  border-radius: 50%;
+  text-align: center;
+  color: #1377ba !important;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.country-flag img {
+  width: 42px;
+  height: 28px;
+  vertical-align: middle;
+  object-fit: cover;
+}
+.bank-chat svg {
+  width: 48px;
+  height: 48px;
+  vertical-align: middle;
+}
+.brokerage-mode .bank-actions .sell {
+  color: #bd0020;
+  border-color: #bd0020;
+}
+@media (max-width: 1500px) and (min-width: 701px) {
+  .reference-total > div:first-child > span {
+    font-size: 14px;
+  }
+  .info-icon {
+    width: 14px;
+    height: 14px;
+    font-size: 10px !important;
+    line-height: 12px !important;
+  }
+  .reference-account-table td {
+    height: 29px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .reference-accounts .account-details {
+    padding-bottom: 20px;
+    margin-bottom: 23px;
+  }
+}
+@media (max-width: 700px) {
+  .bank-page {
+    width: 100%;
+    margin-left: 0;
+    padding: 0 12px;
+  }
+  .bank-header {
+    padding: 0 16px;
+  }
+  .reference-total > div:first-child > span {
+    font-size: 11px;
+  }
+  .bank-nav {
+    align-self: auto;
+  }
+  .reference-account-table td {
+    height: 32px;
+  }
+  .country-flag img {
+    width: 27px;
+    height: 18px;
+  }
+  .quote-fact-columns dl:nth-child(n) {
+    flex: 1 0 30%;
+  }
+  .reference-facts .dividend-facts dl {
+    flex: 1;
+  }
+  .info-icon {
+    width: 12px;
+    height: 12px;
+    font-size: 8px !important;
+    line-height: 10px !important;
+  }
+  .bank-chat svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+.standalone-mockup #broker-inspect {
+  visibility: hidden;
+}
+.trading-surface {
+  padding: 100px 40px 35px;
+  border-radius: 0;
+  min-height: 700px;
+}
+.tool-utility {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.tool-utility > span {
+  flex: 1;
+}
+.tool-utility button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #151719;
+}
+.tool-tabs {
+  display: flex;
+  gap: 0;
+  margin: 0 0 28px;
+  border-bottom: 1px solid #eee;
+}
+.tool-tabs button {
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: #333;
+  padding: 14px 25px;
+  font-size: 15px;
+  border-radius: 0;
+}
+.tool-tabs button[aria-pressed="true"] {
+  color: #1677b8;
+  border-bottom-color: #1677b8;
+}
+.tool-filters {
+  display: flex;
+  gap: 40px;
+  margin: 30px 0;
+}
+.tool-filters label {
+  display: block;
+  flex: 1;
+  color: #888;
+  font-size: 14px;
+}
+.tool-filters select {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+  color: #333;
+  font-size: 18px;
+}
+.screen-results-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fafafa;
+  padding: 15px 20px;
+  font-size: 16px;
+}
+.screen-results-bar button {
+  background: transparent;
+  border: 0;
+  font-size: 15px;
+}
+.screen-results {
+  display: grid;
+  grid-template-columns: 25% 1fr;
+}
+.screen-results aside {
+  background: #fafafa;
+}
+.screen-results aside h4 {
+  font-size: 20px;
+  font-weight: 400;
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 20px;
+  margin: 0;
+  background: #f2f3f5;
+}
+.screen-results aside button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font-size: 24px;
+  color: #111;
+}
+.screen-results aside label {
+  display: block;
+  padding: 14px 20px;
+  font-size: 16px;
+}
+.screen-table {
+  min-width: 0;
+}
+.screen-table-head,
+.screen-table > button {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  padding: 20px;
+  font-size: 14px;
+  color: #888;
+  gap: 20px;
+  text-align: left;
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+.screen-table > button:hover {
+  background: #edf7fb;
+}
+.strategy-builder {
+  border-radius: 0;
+  padding: 100px 40px;
+  min-height: 720px;
+}
+.builder-tabs {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 35px;
+}
+.builder-tabs > span {
+  flex: 1;
+}
+.builder-tabs button {
+  border: 0;
+  color: #111;
+  background: transparent;
+}
+.builder-tabs button:first-child {
+  color: #387b9d;
+}
+.builder-categories {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 45px;
+}
+.builder-categories button {
+  font-size: 16px;
+  border-color: #638eac;
+  border-radius: 0;
+  color: #638eac;
+  padding: 10px 14px;
+}
+.builder-categories button[aria-pressed="true"] {
+  background: #1678bb;
+  color: white;
+}
+.builder-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+.builder-tiles > button {
+  height: 260px;
+  border: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  border-radius: 8px;
+  color: white;
+  text-align: left;
+}
+.builder-tiles > button > span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #5559;
+  padding: 35px 20px;
+  font-size: 22px;
+}
+.building-lines {
+  height: 100%;
+  background:
+    repeating-linear-gradient(65deg, transparent 0 14px, #2f4c6840 15px 17px),
+    repeating-linear-gradient(0deg, #dbe6ed 0 14px, #698ba4 15px 16px);
+  clip-path: polygon(0 40%, 50% 0, 100% 36%, 100% 100%, 0 100%);
+}
+.building-1 {
+  clip-path: polygon(0 25%, 100% 0, 100% 23%, 0 25%);
+}
+.building-2,
+.building-3 {
+  visibility: hidden;
+}
+.reference-bonds {
+  padding: 30px 45px;
+}
+.reference-bonds .card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.reference-bonds h2 {
+  font-size: 28px;
+  margin-bottom: 2px;
+}
+.reference-bonds p {
+  font-size: 18px;
+  margin: 0 0 30px;
+}
+.reference-bonds select {
+  width: 190px;
+  font-size: 18px;
+}
+.reference-bonds th {
+  font-size: 14px;
+  white-space: normal;
+  text-align: left;
+  padding: 10px;
+}
+.reference-bonds td {
+  text-align: left;
+  font-size: 14px;
+  height: 46px;
+}
+.reference-bonds td button {
+  font-size: 15px;
+  color: #166ea9;
+  border: 1px solid #6f99b7;
+  border-radius: 20px;
+  background: transparent;
+  padding: 3px 25px;
+}
+.reference-bonds small {
+  display: block;
+  font-size: 11px;
+  margin-top: 24px;
+}
+.reference-quickcharts .card-title {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 30px;
+}
+.quick-totals {
+  display: flex;
+  gap: 30px;
+}
+.quick-totals span {
+  display: block;
+  color: #365e7e;
+  font-size: 14px;
+}
+.quick-totals strong {
+  font-size: 20px;
+  font-weight: 400;
+}
+.reference-quickcharts th {
+  font-size: 14px;
+}
+.reference-quickcharts td {
+  font-size: 16px;
+  height: 70px;
+}
+.reference-quickcharts td small {
+  display: block;
+  font-size: 14px;
+}
+.reference-quickcharts td:first-child button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.reference-quickcharts td:first-child small {
+  font-size: 13px;
+}
+.reference-quickcharts .sparkline {
+  width: 160px;
+  height: 40px;
+}
+.reference-quickcharts td:last-child button {
+  border-radius: 20px;
+  background: transparent;
+  padding: 4px 20px;
+  border-color: #3889b9;
+  color: #1674b5;
+}
+.reference-quickcharts td:last-child .sell {
+  border-color: #bb0023;
+  color: #bb0023;
+}
+.low-high-line {
+  height: 5px;
+  background: #ddd;
+  position: relative;
+  max-width: 130px;
+  margin: 0 auto 10px;
+}
+.low-high-line i {
+  position: absolute;
+  left: 45%;
+  height: 12px;
+  width: 12px;
+  top: -3px;
+  background: #555;
+  border-radius: 50%;
+}
+.reference-performance {
+  padding: 45px 30px;
+  min-height: 290px;
+}
+.performance-tabs {
+  display: flex;
+  margin-bottom: 30px;
+}
+.performance-tabs button {
+  border: 0;
+  background: #eff7fa;
+  color: #5b6870;
+  padding: 12px 70px;
+  border-radius: 0;
+  font-size: 18px;
+}
+.performance-tabs button[aria-pressed="true"] {
+  background: white;
+  border: 1px solid #333;
+}
+.performance-title {
+  display: flex;
+  gap: 30px;
+  align-items: start;
+}
+.performance-title h2 {
+  font-size: 36px;
+  margin: 0;
+}
+.performance-title small {
+  font-size: 14px;
+  color: #888;
+}
+.performance-title > button {
+  border: 0;
+  padding: 0;
+  font-size: 16px;
+  color: #5686a1;
+}
+.performance-title > div:last-child {
+  display: flex;
+  margin-left: auto;
+}
+.performance-title > div:last-child button {
+  font-size: 16px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  padding: 10px 25px;
+  border-radius: 0;
+}
+.performance-title > div:last-child button[aria-pressed="true"] {
+  border-bottom-color: #1d7eb7;
+  color: #1d7eb7;
+}
+.performance-empty {
+  max-width: 800px;
+  margin: 25px auto 0;
+  text-align: center;
+}
+.performance-empty svg {
+  width: 100%;
+  height: 65px;
+  opacity: 0.4;
+}
+.performance-empty small {
+  font-size: 12px;
+  color: #6b808c;
+}
+.optionsplay {
+  padding: 0 20px 25px;
+  border-radius: 0;
+  color: #444;
+  font-size: 14px;
+}
+.optionsplay-header {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 5px 0;
+}
+.optionsplay-header > div {
+  margin-right: auto;
+}
+.optionsplay-header small {
+  font-size: 14px;
+  display: block;
+  color: #444;
+}
+.optionsplay-header strong {
+  font-size: 30px;
+  font-style: italic;
+  color: #357d9e;
+  font-weight: 400;
+}
+.optionsplay-header strong span {
+  font-size: 12px;
+  vertical-align: top;
+}
+.optionsplay-header > p {
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.5;
+}
+.optionsplay-header > button {
+  border: 0;
+  background: transparent;
+  color: #333;
+}
+.market-delay {
+  color: #b0834f;
+}
+.options-workspace {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 20px;
+  padding-top: 15px;
+}
+.options-chart-side {
+  border: 1px solid #bbb;
+  min-width: 0;
+}
+.option-symbol {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  border-left: 6px solid #13a854;
+  padding: 6px;
+}
+.option-symbol button {
+  font-size: 17px;
+  padding: 5px;
+  border-radius: 0;
+  border-color: #a4c7df;
+  max-width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.option-symbol > span {
+  font-size: 13px;
+  padding: 2px 5px;
+  background: #047eba;
+  color: white;
+}
+.option-symbol > b {
+  font-weight: 400;
+  font-size: 17px;
+  margin-left: auto;
+}
+.option-symbol em {
+  font-style: normal;
+  font-size: 14px;
+}
+.option-metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+}
+.option-metrics b {
+  font-weight: 400;
+  color: #298b67;
+}
+.options-chart-side > h4 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #1479b7;
+  border-bottom: 2px solid #1479b7;
+  padding: 8px 20px;
+  width: 100px;
+  margin: 5px 0 0;
+}
+.options-chart-toolbar {
+  display: flex;
+  justify-content: space-between;
+  background: #f8f8f8;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+  padding: 10px 20px;
+}
+.option-price-chart {
+  height: 320px;
+  position: relative;
+  padding-top: 30px;
+}
+.option-price-chart .bank-chart {
+  height: 100% !important;
+  min-height: 0 !important;
+}
+.option-chart-value {
+  position: absolute;
+  right: 0;
+  top: 30%;
+  background: #c55939;
+  color: white;
+  font-size: 13px;
+  padding: 2px 5px;
+}
+.option-indicator-grid {
+  display: grid;
+  grid-template-columns: repeat(35, 1fr);
+  gap: 2px;
+  padding: 2px 12px;
+}
+.option-indicator-grid i {
+  height: 11px;
+  background: #00ba5b;
+}
+.option-indicator-grid i.red {
+  background: #c05c33;
+}
+.rsi-chart {
+  padding: 10px 12px;
+}
+.rsi-chart svg {
+  width: 100%;
+  height: 70px;
+}
+.options-support {
+  font-size: 14px;
+  color: #278f63;
+  text-align: center;
+  padding: 10px;
+}
+.options-chart-side > p {
+  font-size: 13px;
+  padding: 0 16px;
+  line-height: 1.5;
+}
+.options-trade-side .tool-tabs {
+  margin: 0;
+}
+.options-trade-side .tool-tabs button {
+  font-size: 16px;
+  padding: 8px 30px;
+}
+.options-trade-side .tool-tabs strong {
+  margin-left: auto;
+  font-size: 18px;
+  font-style: italic;
+  color: #347e9f;
+  font-weight: 400;
+}
+.option-direction {
+  display: flex;
+  gap: 18px;
+  padding: 18px 0;
+}
+.option-direction label {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 15px;
+}
+.option-direction input {
+  accent-color: #1879b8;
+}
+.option-strategies {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.option-strategies > article {
+  border: 1px solid #9fc1d9;
+  border-radius: 3px;
+  padding: 8px 10px;
+  background: #f5faff;
+  text-align: center;
+  min-width: 0;
+}
+.option-strategies > article > div:first-child {
+  font-size: 14px;
+  min-height: 50px;
+}
+.option-strategies > article > svg {
+  height: 100px;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #d8e3e9;
+}
+.option-strategies dl {
+  font-size: 15px;
+  margin: 12px 0 5px;
+}
+.option-strategies dl div {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+.option-strategies dt {
+  color: #777;
+}
+.option-strategies dd {
+  margin: 0;
+}
+.option-strategies article > span {
+  font-size: 14px;
+  display: block;
+}
+.option-score {
+  display: block;
+  border: 3px solid #3a9b70;
+  border-radius: 25px;
+  font-size: 25px;
+  width: 100px;
+  margin: 4px auto 15px;
+  background: #fff;
+}
+.option-strategies > article:nth-child(2) .option-score {
+  border-color: #c78a38;
+}
+.option-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+.option-buttons button {
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 3px;
+}
+.option-strategies article > p {
+  font-size: 15px;
+  line-height: 1.5;
+  text-align: left;
+  padding: 0 6px;
+}
+.option-strategies article > p button {
+  font-size: 15px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+.simulator-tabs {
+  margin: 10px 0 !important;
+}
+.simulator-tabs button {
+  font-size: 14px !important;
+  padding: 9px 10px !important;
+  white-space: normal;
+}
+.simulator-note {
+  padding: 15px;
+  background: #f2f2fa;
+  font-size: 17px;
+}
+.options-sim-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: center;
+}
+.options-sim-inputs label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  gap: 8px;
+  align-items: center;
+}
+.options-sim-inputs input[type="number"],
+.options-sim-inputs input[type="date"] {
+  width: 130px;
+  padding: 8px;
+  border-color: #cbdde8;
+  border-radius: 2px;
+  font-size: 15px;
+}
+.options-sim-inputs input[type="range"] {
+  accent-color: #2580be;
+  width: 100%;
+  padding: 0;
+}
+@media (max-width: 1500px) and (min-width: 701px) {
+  .trading-surface,
+  .strategy-builder {
+    padding: 70px 30px 30px;
+  }
+  .tool-tabs button {
+    font-size: 12px;
+    padding: 10px 20px;
+  }
+  .tool-filters label {
+    font-size: 11px;
+  }
+  .tool-filters select {
+    font-size: 14px;
+  }
+  .screen-results-bar {
+    font-size: 13px;
+  }
+  .screen-table-head,
+  .screen-table > button {
+    font-size: 11px;
+    padding: 16px;
+  }
+  .screen-results aside h4 {
+    font-size: 16px;
+  }
+  .screen-results aside label {
+    font-size: 13px;
+  }
+  .reference-bonds p {
+    font-size: 14px;
+  }
+  .reference-bonds th,
+  .reference-bonds td {
+    font-size: 11px;
+  }
+  .reference-bonds td {
+    height: 36px;
+  }
+  .reference-bonds td button {
+    font-size: 12px;
+    padding: 2px 20px;
+  }
+  .reference-quickcharts td {
+    font-size: 13px;
+    height: 57px;
+  }
+  .reference-quickcharts th,
+  .reference-quickcharts td small {
+    font-size: 11px;
+  }
+  .reference-quickcharts .sparkline {
+    width: 120px;
+    height: 35px;
+  }
+  .reference-quickcharts td:last-child button {
+    padding: 3px 16px;
+    font-size: 12px;
+  }
+  .performance-title h2 {
+    font-size: 28px;
+  }
+  .performance-title > button {
+    font-size: 12px;
+  }
+  .performance-title > div:last-child button {
+    font-size: 12px;
+    padding: 8px 20px;
+  }
+  .optionsplay {
+    font-size: 11px;
+  }
+  .optionsplay-header strong {
+    font-size: 24px;
+  }
+  .optionsplay-header > p {
+    font-size: 12px;
+  }
+  .option-symbol > b {
+    font-size: 13px;
+  }
+  .option-symbol em {
+    font-size: 11px;
+  }
+  .option-symbol button {
+    font-size: 13px;
+  }
+  .option-metrics {
+    font-size: 10px;
+    gap: 8px;
+  }
+  .option-direction {
+    gap: 10px;
+  }
+  .option-direction label {
+    font-size: 12px;
+  }
+  .option-strategies > article > div:first-child {
+    font-size: 11px;
+    min-height: 40px;
+  }
+  .option-strategies dl,
+  .option-strategies article > span {
+    font-size: 11px;
+  }
+  .option-strategies article > p,
+  .option-strategies article > p button {
+    font-size: 12px;
+  }
+  .option-buttons button {
+    font-size: 11px;
+    padding: 5px 8px;
+  }
+  .option-score {
+    font-size: 20px;
+    width: 80px;
+  }
+  .options-sim-inputs {
+    gap: 14px;
+  }
+  .options-sim-inputs label {
+    font-size: 11px;
+  }
+  .options-sim-inputs input[type="number"],
+  .options-sim-inputs input[type="date"] {
+    width: 95px;
+    font-size: 12px;
+    padding: 6px;
+  }
+  .simulator-note {
+    font-size: 13px;
+  }
+  .options-trade-side .tool-tabs strong {
+    font-size: 14px;
+  }
+  .option-price-chart {
+    height: 250px;
+  }
+  .builder-tiles > button {
+    height: 210px;
+  }
+  .builder-tiles > button > span {
+    font-size: 18px;
+    padding: 28px 16px;
+  }
+}
+@media (max-width: 700px) {
+  .trading-surface,
+  .strategy-builder {
+    padding: 30px 15px;
+    min-height: 500px;
+  }
+  .tool-filters {
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+  }
+  .tool-filters label {
+    flex: 1 0 40%;
+    font-size: 11px;
+  }
+  .tool-filters select {
+    font-size: 13px;
+    padding: 10px 0;
+  }
+  .tool-tabs {
+    margin-bottom: 15px;
+  }
+  .tool-tabs button {
+    font-size: 11px;
+    padding: 10px 12px;
+  }
+  .screen-results-bar {
+    font-size: 11px;
+    padding: 10px;
+  }
+  .screen-results-bar button {
+    font-size: 11px;
+  }
+  .screen-results {
+    grid-template-columns: 1fr;
+  }
+  .screen-results aside {
+    display: none;
+  }
+  .screen-table-head,
+  .screen-table > button {
+    font-size: 11px;
+    padding: 14px 5px;
+    gap: 10px;
+  }
+  .builder-tabs {
+    gap: 10px;
+  }
+  .builder-tabs button {
+    font-size: 12px;
+    padding: 5px;
+  }
+  .builder-categories {
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 25px;
+  }
+  .builder-categories button {
+    font-size: 11px;
+    padding: 7px;
+  }
+  .builder-tiles {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .builder-tiles > button {
+    height: 150px;
+  }
+  .builder-tiles > button > span {
+    font-size: 14px;
+    padding: 18px 12px;
+  }
+  .reference-bonds {
+    padding: 18px 15px;
+  }
+  .reference-bonds h2 {
+    font-size: 24px;
+  }
+  .reference-bonds p {
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .reference-bonds select {
+    width: 100px;
+    font-size: 12px;
+  }
+  .reference-bonds table {
+    min-width: 900px;
+  }
+  .reference-bonds small {
+    font-size: 10px;
+  }
+  .reference-quickcharts {
+    padding: 15px;
+  }
+  .reference-quickcharts .card-title {
+    display: block;
+  }
+  .reference-quickcharts h2 {
+    font-size: 23px;
+  }
+  .quick-totals {
+    gap: 15px;
+    margin: 15px 0;
+  }
+  .quick-totals span {
+    font-size: 10px;
+  }
+  .quick-totals strong {
+    font-size: 14px;
+  }
+  .reference-quickcharts table {
+    min-width: 1000px;
+  }
+  .reference-performance {
+    padding: 20px 15px;
+  }
+  .performance-tabs button {
+    font-size: 13px;
+    padding: 10px 30px;
+  }
+  .performance-title {
+    display: block;
+  }
+  .performance-title h2 {
+    font-size: 24px;
+  }
+  .performance-title > button {
+    font-size: 11px;
+    margin: 10px 0;
+  }
+  .performance-title > div:last-child button {
+    font-size: 12px;
+    padding: 10px 20px;
+  }
+  .optionsplay {
+    padding: 0 10px 15px;
+  }
+  .optionsplay-header {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .optionsplay-header strong {
+    font-size: 24px;
+  }
+  .optionsplay-header small {
+    font-size: 10px;
+  }
+  .optionsplay-header > p {
+    font-size: 10px;
+  }
+  .optionsplay-header > button {
+    font-size: 12px;
+    padding: 0;
+  }
+  .options-workspace {
+    grid-template-columns: 1fr;
+  }
+  .option-symbol button {
+    font-size: 11px;
+    max-width: 45%;
+    padding: 4px;
+  }
+  .option-symbol > b {
+    font-size: 12px;
+  }
+  .option-symbol em {
+    font-size: 10px;
+  }
+  .option-symbol > span {
+    font-size: 10px;
+  }
+  .option-metrics {
+    font-size: 9px;
+    gap: 6px;
+    padding: 8px;
+  }
+  .options-chart-side > h4 {
+    font-size: 12px;
+  }
+  .options-chart-toolbar {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+  .option-price-chart {
+    height: 200px;
+  }
+  .options-support {
+    font-size: 10px;
+  }
+  .options-chart-side > p {
+    font-size: 10px;
+    padding: 0 10px;
+  }
+  .option-direction {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .option-direction label {
+    font-size: 11px;
+  }
+  .options-trade-side .tool-tabs button {
+    font-size: 12px;
+    padding: 8px 15px;
+  }
+  .options-trade-side .tool-tabs strong {
+    font-size: 12px;
+  }
+  .option-strategies {
+    gap: 5px;
+  }
+  .option-strategies > article {
+    padding: 5px;
+  }
+  .option-strategies > article > div:first-child {
+    font-size: 9px;
+    min-height: 35px;
+  }
+  .option-strategies > article > svg {
+    height: 65px;
+  }
+  .option-strategies dl {
+    font-size: 10px;
+  }
+  .option-strategies dl div {
+    gap: 3px;
+  }
+  .option-strategies article > span {
+    font-size: 9px;
+  }
+  .option-score {
+    font-size: 16px;
+    width: 65px;
+    border-width: 2px;
+  }
+  .option-buttons {
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .option-buttons button {
+    font-size: 10px;
+    padding: 4px 6px;
+  }
+  .option-strategies article > p,
+  .option-strategies article > p button {
+    font-size: 10px;
+  }
+  .simulator-tabs button {
+    font-size: 10px !important;
+  }
+  .simulator-note {
+    font-size: 12px;
+    padding: 10px;
+  }
+  .options-sim-inputs {
+    gap: 10px;
+  }
+  .options-sim-inputs label {
+    font-size: 10px;
+  }
+  .options-sim-inputs input[type="number"],
+  .options-sim-inputs input[type="date"] {
+    width: 90px;
+    font-size: 11px;
+    padding: 5px;
+  }
+}
+.reference-candles {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+@media (max-width: 700px) {
+  .bank-utilities .user-chip #broker-user {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+  .bank-utilities .user-chip {
+    overflow: hidden;
+    min-width: 0;
+    max-width: 88px;
+  }
+  .bank-utilities {
+    min-width: 0;
+  }
+}
+.reference-reports {
+  padding: 35px 45px;
+}
+.reference-reports > section {
+  margin-bottom: 60px;
+}
+.reference-reports h2 {
+  font-size: 26px;
+}
+.report-list > div {
+  display: flex;
+  gap: 15px;
+  align-items: start;
+  margin: 15px 0;
+}
+.report-pdf {
+  color: #777;
+  font-size: 25px;
+  line-height: 1;
+}
+.report-list button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  color: #111;
+  font-size: 16px;
+  white-space: normal;
+  flex: 1;
+}
+.report-list small {
+  font-size: 13px;
+  color: #888;
+}
+.report-pages {
+  font-size: 14px;
+  margin-left: 40px;
+  color: #7c99a7;
+}
+.brokerage-mode #broker-action-dialog.reference-alerts {
+  width: 72vw;
+  max-width: 1380px;
+  max-height: 84vh;
+  padding: 30px;
+  border-radius: 0;
+}
+.reference-alerts .action-heading {
+  padding: 0;
+  margin: 0 0 12px;
+  border: 0;
+  align-items: start;
+}
+.reference-alerts .action-heading h2 {
+  font-size: 42px;
+  margin: 0;
+  font-weight: 500;
+}
+.reference-alerts .action-heading button {
+  border: 0;
+  background: transparent;
+  font-size: 32px;
+  color: #111;
+  padding: 0;
+}
+.reference-alerts .alert-tabs {
+  margin: 0 !important;
+}
+.reference-alerts .alert-tabs button {
+  font-size: 18px;
+  padding: 16px 40px;
+  min-width: 200px;
+}
+.reference-alerts .alert-tabs button[aria-pressed="true"] {
+  border: 1px solid #111;
+  border-radius: 5px;
+  background: #fff;
+}
+.reference-alerts #alert-panel {
+  max-height: 600px;
+  overflow: auto;
+  padding: 30px;
+  box-shadow: 0 3px 9px #0002;
+  margin-top: 0;
+}
+.alert-security {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+.alert-security > button {
+  width: 65%;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: start;
+  text-align: left;
+  border: 1px solid #dedede;
+  border-radius: 4px;
+  background: #fff;
+  padding: 14px;
+  font-size: 18px;
+}
+.alert-security img {
+  width: 25px;
+  height: 17px;
+}
+.alert-security > button small {
+  font-size: 13px;
+  color: #365e7e;
+  margin-left: auto;
+}
+.alert-security > button > span {
+  font-size: 25px;
+  margin-left: 80px;
+  color: #111;
+}
+.alert-security > div > small {
+  display: block;
+  color: #365e7e;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+.alert-security > div > span {
+  display: block;
+  font-size: 20px;
+}
+.alert-asset-kind {
+  display: flex;
+  gap: 30px;
+  margin: 25px 0;
+}
+.alert-asset-kind label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+}
+.alert-asset-kind input {
+  accent-color: #1678b6;
+}
+.reference-alerts #alert-form {
+  display: block;
+}
+.alert-trigger-row {
+  display: grid;
+  grid-template-columns: 40% 25% 10% 25%;
+  gap: 0;
+  align-items: center;
+  border-top: 1px solid #eee;
+  padding: 20px 0;
+}
+.alert-trigger-row > span {
+  font-size: 18px;
+  color: #333;
+  padding-right: 15px;
+}
+.alert-trigger-row input {
+  font-size: 18px;
+  border: 1px solid #dedede;
+  padding: 13px 15px;
+  width: 100%;
+  max-width: none;
+}
+.alert-trigger-row input::placeholder {
+  color: #aaa;
+}
+.alert-trigger-row small {
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+}
+.alert-email-row {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  align-items: center;
+  border-top: 1px solid #eee;
+  padding: 30px 0 20px;
+}
+.alert-email-row label {
+  font-size: 18px;
+}
+.alert-email-row input {
+  border-color: #ddd;
+  font-size: 18px;
+  padding: 12px 15px;
+  max-width: none;
+}
+.alert-submit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.alert-submit small {
+  font-size: 11px;
+  color: #6c8794;
+}
+.alert-submit .blue {
+  border-radius: 24px;
+  width: 225px;
+  font-size: 18px;
+  padding: 10px;
+}
+@media (max-width: 1500px) and (min-width: 701px) {
+  .brokerage-mode #broker-action-dialog.reference-alerts {
+    padding: 24px;
+  }
+  .reference-alerts .action-heading h2 {
+    font-size: 34px;
+  }
+  .reference-alerts .alert-tabs button {
+    font-size: 14px;
+    padding: 12px 30px;
+    min-width: 160px;
+  }
+  .reference-alerts #alert-panel {
+    padding: 24px;
+  }
+  .alert-security > button {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .alert-security > button small {
+    font-size: 10px;
+  }
+  .alert-security > button > span {
+    margin-left: 45px;
+  }
+  .alert-security > div > small {
+    font-size: 11px;
+  }
+  .alert-security > div > span {
+    font-size: 16px;
+  }
+  .alert-asset-kind {
+    margin: 20px 0;
+  }
+  .alert-asset-kind label {
+    font-size: 14px;
+  }
+  .alert-trigger-row {
+    padding: 16px 0;
+  }
+  .alert-trigger-row > span,
+  .alert-trigger-row input,
+  .alert-email-row label,
+  .alert-email-row input {
+    font-size: 14px;
+  }
+  .alert-trigger-row input {
+    padding: 10px 12px;
+  }
+  .alert-email-row {
+    padding: 24px 0 16px;
+  }
+  .alert-submit .blue {
+    width: 180px;
+    font-size: 14px;
+  }
+  .alert-trigger-row small {
+    font-size: 11px;
+  }
+}
+@media (max-width: 700px) {
+  .reference-reports {
+    padding: 20px 16px;
+  }
+  .reference-reports h2 {
+    font-size: 20px;
+  }
+  .report-list > div {
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .report-list button {
+    font-size: 12px;
+  }
+  .report-list small {
+    font-size: 10px;
+  }
+  .report-pdf {
+    font-size: 20px;
+  }
+  .reference-reports > section {
+    margin-bottom: 30px;
+  }
+  .brokerage-mode #broker-action-dialog.reference-alerts {
+    width: 96vw;
+    padding: 16px;
+    max-height: 94vh;
+  }
+  .reference-alerts .action-heading h2 {
+    font-size: 28px;
+  }
+  .reference-alerts .alert-tabs button {
+    font-size: 11px;
+    min-width: 0;
+    padding: 10px 12px;
+    flex: 1;
+  }
+  .reference-alerts #alert-panel {
+    padding: 15px 10px;
+    max-height: 65vh;
+  }
+  .alert-security {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .alert-security > button {
+    width: 100%;
+    font-size: 13px;
+    padding: 10px;
+  }
+  .alert-security > button small {
+    font-size: 9px;
+  }
+  .alert-security > button > span {
+    margin-left: 10px;
+    font-size: 18px;
+  }
+  .alert-security > div > small {
+    font-size: 10px;
+    margin-bottom: 3px;
+  }
+  .alert-security > div > span {
+    font-size: 14px;
+  }
+  .alert-asset-kind {
+    margin: 16px 0;
+    gap: 25px;
+  }
+  .alert-asset-kind label {
+    font-size: 12px;
+  }
+  .alert-trigger-row {
+    grid-template-columns: 44% 25% 6% 25%;
+    padding: 15px 0;
+  }
+  .alert-trigger-row > span {
+    font-size: 11px;
+    padding-right: 8px;
+  }
+  .alert-trigger-row input {
+    font-size: 10px;
+    padding: 8px 4px;
+  }
+  .alert-trigger-row small {
+    font-size: 7px;
+    word-break: break-all;
+  }
+  .alert-email-row {
+    grid-template-columns: 44% 56%;
+    padding: 20px 0;
+  }
+  .alert-email-row label {
+    font-size: 11px;
+  }
+  .alert-email-row input {
+    font-size: 11px;
+    padding: 8px;
+  }
+  .alert-submit .blue {
+    width: 100px;
+    font-size: 12px;
+    padding: 8px;
+  }
+  .alert-submit small {
+    font-size: 8px;
+    padding-right: 10px;
+  }
+}
+.building-0 {
+  clip-path: none;
+  background: url("/assets/reference-building.jpg") center/cover no-repeat;
+}
+.building-1 {
+  clip-path: none;
+  background: url("/assets/reference-building-volume.jpg") center top/100% auto
+    no-repeat;
+}
+.profile-reference-icon {
+  display: block;
+  width: 150px;
+  height: 120px;
+  object-fit: contain;
+  flex: none;
+}
+@media (max-width: 1500px) and (min-width: 701px) {
+  .profile-reference-icon {
+    width: 120px;
+    height: 96px;
+  }
+}
+@media (max-width: 700px) {
+  .profile-reference-icon {
+    width: 60px;
+    height: 60px;
+  }
+}
+/* Typography read from NBC's public first-party stylesheet on15Nov2026. */
+@font-face {
+  font-family: Nationale Sans;
+  src: url("/assets/fonts/NationaleSans-regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Nationale Sans;
+  src: url("/assets/fonts/NationaleSans-medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: Nationale Sans;
+  src: url("/assets/fonts/NationaleSans-bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+body.brokerage-mode,
+.brokerage-mode h1,
+.brokerage-mode h2,
+.brokerage-mode h3,
+.brokerage-mode button,
+.brokerage-mode input,
+.brokerage-mode select {
+  font-family:
+    Nationale Sans,
+    Roboto,
+    Arial,
+    sans-serif;
+}
+.brokerage-mode #broker-analysis,
+.brokerage-mode #broker-analysis h1,
+.brokerage-mode #broker-analysis h2,
+.brokerage-mode #broker-analysis h3,
+.brokerage-mode #broker-analysis button,
+.brokerage-mode #broker-analysis input,
+.brokerage-mode #broker-analysis select {
+  font-family: Montserrat, Arial, sans-serif;
+}
+body.brokerage-mode,
+.reference-notice {
+  background-color: #eef6fb;
+}
+/* Native reference corrections after the independent visual comparison. */
+.reference-quote .quote-main h2 {
+  font-size: 40px;
+}
+.quote-summary strong {
+  font-size: 30px;
+}
+.quote-facts.reference-facts {
+  grid-template-columns: 76fr 24fr;
+  padding-top: 27px;
+  padding-bottom: 25px;
+}
+.reference-facts h3 {
+  font-size: 40px;
+}
+.quote-fact-columns dl:nth-child(1) {
+  flex: 0 0 16.7%;
+}
+.quote-fact-columns dl:nth-child(2) {
+  flex: 0 0 17%;
+}
+.quote-fact-columns dl:nth-child(3) {
+  flex: 0 0 22.4%;
+}
+.quote-fact-columns dl:nth-child(4) {
+  flex: 0 0 22.7%;
+}
+.quote-fact-columns dl:nth-child(5) {
+  flex: 0 0 12.6%;
+}
+.quote-fact-columns dl:nth-child(6) {
+  flex: 0 0 8.6%;
+}
+.quote-fact-columns dl div {
+  padding-bottom: 16px;
+}
+.reference-facts .dividend-facts dl {
+  flex: 1;
+}
+.reference-quote .quote-actions > div button {
+  font-size: 20px;
+  line-height: 26px;
+  padding: 6px 16px;
+}
+.market-percent {
+  font-size: 20px;
+  padding: 8px 17px;
+}
+.index-bottom > b {
+  width: 100px;
+}
+.profile-intro {
+  background: #edf5fa;
+}
+@media (max-width: 1500px) and (min-width: 701px) {
+  .reference-quote .quote-main h2 {
+    font-size: 32px;
+  }
+  .quote-summary strong {
+    font-size: 24px;
+  }
+  .reference-facts h3 {
+    font-size: 32px;
+  }
+  .quote-facts.reference-facts {
+    padding-top: 22px;
+    padding-bottom: 20px;
+  }
+  .quote-fact-columns dl div {
+    padding-bottom: 13px;
+  }
+  .market-percent {
+    font-size: 16px;
+    padding: 6px 13px;
+  }
+  .index-bottom > b {
+    width: 80px;
+  }
+  .reference-quote .quote-actions > div button {
+    font-size: 16px;
+    line-height: 21px;
+    padding: 5px 12px;
+  }
+}
+@media (max-width: 700px) {
+  .reference-quote .quote-main h2 {
+    font-size: 24px;
+  }
+  .quote-summary strong {
+    font-size: 19px;
+  }
+  .reference-facts h3 {
+    font-size: 24px;
+  }
+  .quote-facts.reference-facts {
+    grid-template-columns: 1fr;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .quote-fact-columns dl:nth-child(n) {
+    flex: 1 0 30%;
+  }
+  .quote-fact-columns dl div {
+    padding-bottom: 10px;
+  }
+  .reference-facts .dividend-facts dl {
+    flex: 1;
+  }
+  .reference-quote .quote-actions > div button {
+    font-size: 12px;
+    line-height: 18px;
+    padding: 5px 12px;
+  }
+  .market-percent {
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+  .index-bottom > b {
+    width: 70px;
+  }
+  .bank-footer > span:last-child {
+    overflow-wrap: anywhere;
+    min-width: 0;
+  }
+  .bank-footer img {
+    flex: none;
+    width: 25px;
+    height: 25px;
+  }
+}
+/* First two quote columns share the unruled group in the supplied reference. */
+.quote-fact-columns dl:nth-child(2) {
+  flex-basis: 16%;
+  border-left: 0;
+  padding-left: 0;
+}
+.quote-fact-columns dl:nth-child(5) {
+  flex-basis: 12.5%;
+}
+.quote-fact-columns dl:nth-child(6) {
+  flex-basis: 9.7%;
+  padding-right: 0;
+}
+@media (max-width: 700px) {
+  .quote-fact-columns dl:nth-child(n) {
+    flex-basis: 30%;
+    padding: 0 8px;
+  }
+  .quote-fact-columns dl:nth-child(2) {
+    padding-left: 8px;
+  }
+  .quote-fact-columns dl:first-child,
+  .quote-fact-columns dl:nth-child(4) {
+    padding-left: 0;
+  }
+}
+.inline-country-flag {
+  width: 23px;
+  height: 15px;
+  vertical-align: middle;
+  margin-right: 3px;
+}
+.muted-star {
+  display: inline;
+  font-style: normal;
+  color: #d7e6ec;
+}
+.refresh-symbol svg {
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+.quote-refresh-ring {
+  display: none;
+}
+#brokerage[data-view="quote"] .quote-refresh-ring {
+  display: block;
+}
+#brokerage[data-view="quote"] .bank-actions [data-action="search"] {
+  background: white;
+  color: #126fb2;
+  border: 2px solid #303333;
+  box-shadow: 0 1px 4px #0002;
+}
+@media (max-width: 1500px) and (min-width: 701px) {
+  .refresh-symbol svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+@media (max-width: 700px) {
+  .refresh-symbol svg {
+    width: 27px;
+    height: 27px;
+  }
+  .inline-country-flag {
+    width: 18px;
+    height: 12px;
+  }
+}
+.broker-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: -0.1em;
+}
+.broker-icon.filled-icon {
+  fill: currentColor;
+  stroke-width: 0.5;
+}
+.broker-icon.sort-icon {
+  transform: rotate(180deg);
+  width: 0.7em;
+  height: 0.7em;
+}
+.bank-nav .broker-icon {
+  width: 12px;
+  height: 12px;
+  margin-left: 4px;
+  stroke-width: 1.5;
+}
+.bank-actions [data-action="tools"] .broker-icon {
+  width: 12px;
+  height: 12px;
+}
+.user-outline .broker-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+.quote-actions > button .broker-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  vertical-align: -5px;
+}
+.reference-account-table .info-plus {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #1577ba;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+.reference-account-table .info-plus .broker-icon {
+  width: 12px;
+  height: 12px;
+}
+.reference-watchlist td:first-child .broker-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+}
+.reference-accounts .card-footer .broker-icon {
+  width: 19px;
+  height: 19px;
+  vertical-align: -4px;
+}
+@media (max-width: 1500px) and (min-width: 701px) {
+  .quote-actions > button .broker-icon {
+    width: 19px;
+    height: 19px;
+    vertical-align: -4px;
+  }
+}
+@media (max-width: 700px) {
+  .user-outline .broker-icon {
+    width: 15px;
+    height: 15px;
+  }
+  .bank-nav .broker-icon {
+    width: 8px;
+    height: 8px;
+    margin-left: 2px;
+  }
+  .quote-actions > button .broker-icon {
+    width: 15px;
+    height: 15px;
+    margin-left: 3px;
+    vertical-align: -3px;
+  }
+}
+
+/* Measured from the 1920px walkthrough; compact/mobile retain their own grid. */
+@media (min-width: 1501px) {
+  .reference-account-table { table-layout: fixed; }
+  .reference-account-table col:nth-child(1) { width: 17.45%; }
+  .reference-account-table col:nth-child(2) { width: 9.25%; }
+  .reference-account-table col:nth-child(3) { width: 14.62%; }
+  .reference-account-table col:nth-child(4) { width: 14.69%; }
+  .reference-account-table col:nth-child(5) { width: 14.69%; }
+  .reference-account-table col:nth-child(6) { width: 11.87%; }
+  .reference-account-table col:nth-child(7) { width: 17.43%; }
+  .reference-account-table td:first-child { width: auto; }
+  .reference-account-table th { text-align: left; }
+  .reference-account-table th:nth-child(1) { padding-left: 0.54%; }
+  .reference-account-table th:nth-child(2) { padding-left: 6.1%; }
+  .reference-account-table th:nth-child(3) { padding-left: 7.91%; }
+  .reference-account-table th:nth-child(4) { padding-left: 1.88%; }
+  .reference-account-table th:nth-child(5) { padding-left: 6.77%; }
+  .reference-account-table th:nth-child(6) { padding-left: 6.57%; }
+  .reference-account-table th:nth-child(7) { padding-left: 7.65%; }
+  .bank-nav button { min-width: 0; padding-left: 12px; padding-right: 12px; }
+  .bank-nav button:nth-child(1) { width: 147px; }
+  .bank-nav button:nth-child(2) { width: 136px; }
+  .bank-nav button:nth-child(3) { width: 146px; }
+  .bank-nav button:nth-child(4) { width: 168px; }
+}
+.bank-footer img { object-fit: contain; width: 80px; flex: none; }
+
+/* Allocation snapshot at video500s. Native table and SVG, no raster page. */
+.reference-allocation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 24px 30px 0;
+}
+.allocation-table { min-width: 0; }
+.allocation-columns {
+  display: grid;
+  grid-template-columns: 41% 12% 18% 22% 7%;
+  align-items: center;
+  min-height: 49px;
+  border-bottom: 2px solid #ececec;
+  font-size: 14px;
+}
+.allocation-columns > :nth-child(n+2) { text-align: right; }
+.allocation-labels { color: #365e7e; line-height: 15px; }
+.allocation-labels > :first-child { padding-left: 12px; }
+.allocation-category strong {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  grid-column: 1 / 3;
+  font-size: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.allocation-category > span:empty { display: none; }
+.allocation-category i {
+  width: 32px; height: 32px; border-radius: 50%; flex: none;
+}
+.cash-key { background: #b2e8cf; }
+.equity-key { background: #0078b9; }
+.allocation-columns button {
+  width: 28px; height: 28px; border: 1px solid #1677b8;
+  border-radius: 50%; padding: 0; margin: auto;
+  display: grid; place-items: center; color: #1677b8;
+}
+.allocation-columns button span { width: 16px; height: 1px; background: currentColor; position: relative; }
+.allocation-columns button[aria-expanded="false"] span::after {
+  content: ""; width: 1px; height: 16px; background: currentColor;
+  position: absolute; left: 7px; top: -7px;
+}
+.allocation-subcategory { margin-left: 44px; background: #f7fafb; }
+.allocation-subcategory > :first-child { font-size: 18px; padding-left: 28px; }
+#allocation-positions { margin-left: 44px; background: #f7fafb; }
+#allocation-positions table { width: 100%; min-width: 660px; table-layout: fixed; }
+#allocation-positions th { font-size: 14px; font-weight: 400; color: #365e7e; }
+#allocation-positions th:first-child { width: 32%; }
+#allocation-positions th, #allocation-positions td { padding: 8px; text-align: right; white-space: nowrap; }
+#allocation-positions th:first-child, #allocation-positions td:first-child { text-align: left; }
+#allocation-positions td { font-size: 14px; border: 0; height: 38px; }
+#allocation-positions .allocation-description { color: #365e7e; overflow: hidden; text-overflow: ellipsis; }
+.allocation-total { font-size: 20px; border-top: 2px solid #ddd; border-bottom: 0; }
+.allocation-total strong { font-weight: 500; }
+.allocation-pie { width: 100%; max-width: 444px; margin: 20px auto; }
+@media (min-width: 1101px) and (max-width: 1500px) {
+  .reference-quote .quote-summary {
+    display: grid;
+    grid-template-columns: .7fr 1.15fr .75fr 1.2fr .85fr 1fr 1.1fr;
+    gap: 9px;
+  }
+  .reference-quote .quote-summary .quote-rating { padding-left: 9px; }
+  .reference-quote .quote-summary strong { font-size: 18px; }
+}
+@media (max-width: 1100px) {
+  .reference-allocation { display: block; padding: 16px; }
+  .allocation-pie { display: block; max-width: 320px; }
+  .allocation-category strong { font-size: 15px; gap: 8px; white-space: normal; }
+  .allocation-columns { font-size: 12px; }
+  .allocation-category i { width: 20px; height: 20px; }
+  .allocation-subcategory, #allocation-positions { margin-left: 12px; }
+  .allocation-subcategory > :first-child { font-size: 13px; padding-left: 8px; }
+  .allocation-total { font-size: 15px; }
+  .allocation-columns button { width: 22px; height: 22px; }
+}
+@media (min-width: 1101px) {
+  #allocation-positions { margin-left: 68px; }
+  #allocation-positions th:nth-child(2) { width: 14%; }
+  #allocation-positions th:nth-child(n+3) { width: 18%; }
+}
+
+/* Mobile utilities occupy their own space instead of covering reference data. */
+.watchlist-selector { display: block; margin: 12px 0; color: #365e7e; }
+.watchlist-selector select { margin-left: 12px; max-width: 100%; }
+@media (max-width: 1100px) {
+  .reference-notice {
+    position: static;
+    margin: 12px 0 0;
+    font-size: 10px;
+    line-height: 16px;
+  }
+  .bank-chat {
+    position: static;
+    display: block;
+    margin: 0 16px 16px auto;
+    width: 44px;
+    height: 44px;
+  }
+  .watchlist-selector select { margin-left: 0; width: 100%; }
+}
+
+@media (min-width: 1101px) {
+  .reference-notice { max-width: 90px; }
+}
+
+/* Watchlist column boundaries measured in the native345s frame at1920px. */
+.reference-watchlist table { table-layout: fixed; }
+.reference-watchlist .watch-col-58 { width: 3.89%; }
+.reference-watchlist .watch-col-340 { width: 22.82%; }
+.reference-watchlist .watch-col-50 { width: 3.36%; }
+.reference-watchlist .watch-col-95 { width: 6.38%; }
+.reference-watchlist .watch-col-94 { width: 6.31%; }
+.reference-watchlist .watch-col-137 { width: 9.19%; }
+.reference-watchlist .watch-col-135 { width: 9.06%; }
+.reference-watchlist .watch-col-136 { width: 9.13%; }
+.reference-watchlist .watch-col-175 { width: 11.75%; }
+.reference-watchlist .watch-col-200 { width: 13.42%; }
+.reference-watchlist .watch-col-70 { width: 4.70%; }
+.reference-watchlist th { padding: 4px 5px; font-size: 14px; }
+.reference-watchlist th:nth-child(2) { text-align: left; }
+.reference-watchlist td:nth-child(2) { white-space: normal; }
+.reference-watchlist td small { font-size: 14px; line-height: 18px; }
+.reference-watchlist td { padding: 8px 5px; height: 63px; }
+.reference-watchlist .card-title h2 { display: flex; align-items: center; font-size: 28px; }
+.reference-watchlist .card-title [data-action="collapse-list"] {
+  width: 26px; height: 26px; padding: 0; margin-right: 24px;
+  border: 1px solid #1477b5; border-radius: 50%; color: #1477b5;
+  display: grid; place-items: center; flex: none;
+}
+[data-action="collapse-list"] span { width: 14px; height: 1px; background: currentColor; position: relative; }
+[data-action="collapse-list"][aria-expanded="false"] span::after {
+  content: ""; width: 1px; height: 14px; position: absolute; left: 7px; top: -7px; background: currentColor;
+}
+.etf-tabs { margin-bottom: 0; border: 0; }
+.etf-tabs button { min-width: 200px; padding: 16px 14px; font-size: 20px; background: #dcedf1; border-radius: 12px 12px 0 0; }
+.etf-tabs button[aria-pressed="true"] { background: white; color: #1677b8; border-bottom: 0; }
+.etf-surface { border: 0; border-radius: 0; padding: 48px 30px; }
+.etf-surface h2 { font-size: 18px; color: #00314c; margin: 0 5px 38px; }
+.etf-region { display: flex; gap: 56px; align-items: center; padding: 0 37px 38px; border-bottom: 1px solid #ccc; font-size: 20px; }
+.etf-region > div { display: flex; }
+.etf-region button { font-size: 18px; border: 1px solid #1677b8; border-radius: 0; padding: 12px 30px; color: #1677b8; }
+.etf-region button:first-child { border-radius: 4px 0 0 4px; }
+.etf-region button:last-child { border-radius: 0 4px 4px 0; }
+.etf-region button[aria-pressed="true"] { color: white; background: #1677b8; }
+.etf-criteria-heading { display: flex; justify-content: space-between; align-items: center; margin: 38px 37px; }
+.etf-criteria-heading h3 { font-size: 26px; font-weight: 400; margin: 0; }
+.etf-criteria-heading button { border: 0; color: #1677b8; font-size: 18px; }
+#etf-criteria { margin: 0 37px; }
+#etf-criteria > p { font-size: 18px; margin: 0 0 12px; }
+.etf-groups { display: grid; grid-template-columns: repeat(3, 1fr) 260px; gap: 18px; align-items: center; }
+.etf-groups select { width: 100%; height: 45px; font-size: 18px; padding: 8px 14px; border: 1px solid #aaa; border-radius: 4px; }
+.etf-groups > button { justify-self: end; border: 1px solid #1677b8; border-radius: 24px; color: #1677b8; padding: 10px 30px; }
+.etf-criteria-columns { display: grid; grid-template-columns: 1fr 180px 100px; padding: 42px 12px 10px; border-bottom: 1px solid #ccc; color: #365e7e; }
+.etf-type { display: grid; grid-template-columns: 1fr 180px 100px; padding: 30px 12px; }
+.etf-type h4 { font-size: 22px; font-weight: 500; grid-column: 1 / -1; margin: 0 0 40px; }
+.etf-type label { margin-right: 24px; font-size: 20px; }
+.etf-type input { margin-right: 6px; }
+.etf-type button { border: 0; color: #1677b8; }
+.etf-source-note { margin: 30px 37px 0; font-size: 12px; color: #365e7e; }
+@media (max-width:1100px) {
+  .reference-watchlist .card-title h2 { font-size: 17px; flex-wrap: wrap; }
+  .reference-watchlist .card-title [data-action="collapse-list"] { margin-right: 12px; }
+  .etf-tabs button { min-width: auto; }
+  .etf-surface { padding: 24px 16px; }
+  .etf-region { flex-wrap: wrap; gap: 16px; padding: 0 0 24px; }
+  .etf-region button { padding: 10px; font-size: 14px; }
+  .etf-criteria-heading { margin: 24px 0; }
+  .etf-criteria-heading h3 { font-size: 20px; }
+  #etf-criteria { margin: 0; }
+  .etf-groups { grid-template-columns: 1fr; }
+  .etf-criteria-columns, .etf-type { grid-template-columns: 1fr 65px 55px; }
+  .etf-source-note { margin: 24px 0 0; }
+}
+@media (min-width:1101px) {
+  .reference-lists h2 { font-size: 40px; }
+  .reference-lists .blue { font-size: 20px; }
+  .reference-watchlist { margin-top: 40px; padding-top: 32px; }
+  .reference-watchlist .card-title h2 { font-size: 30px; }
+  .reference-watchlist td:nth-child(2) small { max-width: 255px; white-space: normal; }
+  .reference-watchlist td:nth-child(10) { text-align: left; padding-left: 15px; }
+  .reference-watchlist td:last-child { text-align: left; padding-left: 25px; }
+  .reference-watchlist td .tiny-buy { padding: 3px 20px; }
+}
+.etf-surface h2 { margin-bottom: 38px; }
+.etf-tabs button { padding-top: 12px; padding-bottom: 12px; }
+.etf-region { gap: 56px; }
+.etf-region > span { min-width: 193px; }
+.etf-region button { padding-top: 10px; padding-bottom: 10px; }
+
+.etf-type label { display: inline-flex; align-items: center; white-space: nowrap; }
+
+/* Walkthrough347s: Markets dropdown sits below its own navigation item. */
+.bank-toolbar > .bank-dropdown {
+  top: 100%;
+  left: 0;
+  width: 164px;
+  min-width: 164px;
+  max-width: none;
+  border-radius: 0 0 5px 5px;
+  border: 0;
+  box-shadow: 0 2px 6px #0005;
+  overflow: hidden;
+}
+.bank-toolbar > .bank-dropdown[data-navigation="Marchés"] { left: 140px; }
+.bank-toolbar > .bank-dropdown[data-navigation="Activités"] { left: 286px; }
+.bank-toolbar > .bank-dropdown[data-navigation="Documents"] { left: 432px; }
+.bank-toolbar > .bank-dropdown[data-navigation="Recherche"] { left: 600px; }
+.bank-toolbar > .bank-dropdown button {
+  height: 70px;
+  padding: 0 20px;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  font-family: "Nationale Sans", Arial, sans-serif;
+  font-size: 18px;
+  color: #000;
+  background: white;
+  white-space: nowrap;
+}
+.bank-toolbar > .bank-dropdown button:last-child { border-bottom: 0; }
+.bank-toolbar > .bank-dropdown button[aria-current="page"],
+.bank-toolbar > .bank-dropdown button:hover,
+.bank-toolbar > .bank-dropdown button:focus-visible {
+  background: #eef7fb;
+  color: #126fb2;
+}
+@media (max-width: 1500px) and (min-width: 701px) {
+  .bank-toolbar > .bank-dropdown[data-navigation="Marchés"] { left: 108px; }
+  .bank-toolbar > .bank-dropdown[data-navigation="Activités"] { left: 216px; }
+  .bank-toolbar > .bank-dropdown[data-navigation="Documents"] { left: 324px; }
+  .bank-toolbar > .bank-dropdown[data-navigation="Recherche"] { left: 432px; }
+}
+@media (max-width: 700px) {
+  .bank-toolbar > .bank-dropdown { max-width: 100%; }
+  .bank-toolbar > .bank-dropdown[data-navigation="Marchés"] { left: 20%; }
+  .bank-toolbar > .bank-dropdown[data-navigation="Activités"] { left: 40%; }
+  .bank-toolbar > .bank-dropdown[data-navigation="Documents"],
+  .bank-toolbar > .bank-dropdown[data-navigation="Recherche"] { left: auto; right: 0; }
+  .bank-toolbar > .bank-dropdown button { height: 48px; font-size: 16px; }
+}
+
+.bank-nav button[aria-expanded="true"] {
+  background: white;
+  color: #126fb2;
+  border-bottom-color: #1478ba;
+}
+/* Research labels are longer than the seven native Markets entries. */
+.bank-toolbar > .bank-dropdown[data-navigation="Recherche"] { width: 230px; }
+.bank-toolbar > .bank-dropdown[data-navigation="Activités"],
+.bank-toolbar > .bank-dropdown[data-navigation="Documents"] { width: 230px; }
+@media (max-width: 700px) {
+  .bank-toolbar > .bank-dropdown[data-navigation="Activités"] { left: auto; right: 0; }
+}
+
+/* Technical Insight landing page, walkthrough350s (110px chrome excluded). */
+.technical-recent { padding: 125px 58px 35px; position: relative; }
+.technical-recent::before { content: ""; position: absolute; left: 0; right: 0; top: 61px; border-top: 1px solid #f7f7f7; }
+.technical-recent .tool-utility { margin: 0 14px 48px; height: 28px; gap: 25px; }
+.technical-recent .tool-utility svg { width: 25px; height: 25px; display: block; }
+.brokerage-mode .recently-viewed h2 { font-size: 22px; margin: 0 0 22px; line-height: 26px; }
+.recently-viewed h2 .info-icon { margin-left: 7px; }
+.recent-cards { display: flex; gap: 24px; overflow-x: auto; padding: 2px 2px 6px; scroll-snap-type: x mandatory; }
+.brokerage-mode .recent-card { display: block; flex: 0 0 352px; text-align: left; padding: 13px 13px 0; border: 1px solid #e6e6e6; border-radius: 4px; background: white; color: #111; box-shadow: 0 1px 5px #0002; scroll-snap-align: start; overflow: hidden; }
+.recent-card > strong, .recent-symbol { display: block; font-size: 16px; font-weight: 400; }
+.recent-symbol { color: #707070; margin-bottom: 10px; }
+.recent-industry { display: inline-block; background: #74737c; color: white; font-size: 14px; border-radius: 2px; padding: 3px 10px; margin: 7px 0 10px; }
+.recent-values { display: flex; justify-content: space-between; color: #777; font-size: 16px; }
+.recent-values > span:last-child { font-size: 21px; line-height: 24px; }
+.recent-card > small { display: block; text-align: right; color: #777; font-size: 13px; }
+.recent-chart { width: calc(100% + 26px); margin: 0 -13px; display: block; height: 165px; border-top: 1px solid #fafafa; }
+.recent-chart text { fill: #777; font-size: 12px; }
+.recent-source { color: #747474; font-size: 12px; margin-top: 22px; }
+@media(max-width: 800px) {
+  .technical-recent { padding: 65px 18px 25px; }
+  .technical-recent .tool-utility { margin: 0 0 30px; }
+  .brokerage-mode .recent-card { flex-basis: min(352px, 100%); }
+}
+.recent-carousel { position: relative; }
+.brokerage-mode .recent-carousel > button { position: absolute; top: 145px; z-index: 1; width: 44px; height: 44px; border: 0; border-radius: 50%; background: #fffd; box-shadow: 0 1px 7px #0001; color: #555; font-size: 38px; line-height: 1; padding: 0; }
+.recent-previous { left: -14px; }
+.recent-next { right: -14px; }
+.recent-card .positive { color: #008000; }
+.recent-card .negative { color: #d00000; }
+@media(min-width: 1400px) {
+  .bank-subnav.trading-tabs button { flex: 0 0 202px; height: 50px; padding: 12px 16px; }
+  .bank-subnav.trading-tabs button:first-child { flex-basis: 201px; }
+  .bank-subnav.trading-tabs button:nth-child(2) { flex-basis: 228px; }
+  .technical-recent { padding-top: 132px; }
+}
+.recent-chart text[fill="white"] { fill: white; }
+
+/* Baxter detail, walkthrough390–395s. Coordinates exclude browser chrome. */
+.fundamental-surface { position: relative; padding: 108px 60px 36px; border-radius: 0; }
+.fundamental-surface::before { content: ""; position: absolute; top: 58px; left: 0; right: 0; border-top: 1px solid #f7f7f7; }
+.fundamental-search { display: flex; margin: 0 0 54px auto; width: 600px; max-width: 100%; height: 56px; }
+.fundamental-search input { min-width: 0; flex: 1; border: 0; background: #fafafa; padding: 16px 22px; font-size: 17px; }
+.fundamental-search button { width: 72px; background: #1775bf; border: 0; border-radius: 0 5px 5px 0; color: white; }
+.fundamental-search button svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 2.5; }
+.fundamental-company { display: flex; align-items: center; gap: 24px; margin-bottom: 24px; height: 42px; }
+.fundamental-company > button { border: 0; background: transparent; color: #333; font-size: 32px; width: 54px; padding: 0; }
+.brokerage-mode .fundamental-company h2 { margin: 0; font-size: 30px; font-weight: 400; line-height: 40px; }
+.fundamental-company > span { padding: 14px 12px; background: #fafafa; font-size: 15px; border-radius: 8px; }
+.fundamental-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.fundamental-panel { background: #fafafa; border-radius: 8px; padding: 28px 20px 24px; }
+.brokerage-mode .fundamental-panel h3 { display: flex; align-items: center; justify-content: space-between; font-size: 18px; line-height: 25px; font-weight: 400; margin: 0; color: #444; }
+.fundamental-panel h3 button { border: 0; background: transparent; padding: 0 18px 0 0; }
+.fundamental-panel .info-icon { width: 24px; height: 24px; font-size: 17px; color: #555; }
+.rating-panel { height: 242px; }
+.quantamental-gauge { position: relative; width: 240px; margin: 24px auto 0; }
+.quantamental-gauge svg { display: block; width: 240px; height: 145px; fill: none; }
+.gauge-track,.gauge-value { stroke: #e6e6e6; stroke-width: 10; stroke-linecap: round; fill: none; }
+.gauge-value { stroke: green; }
+.quantamental-gauge circle { fill: #fafafa; stroke: green; stroke-width: 5; }
+.quantamental-value { position: absolute; top: 85px; left: 69px; font-size: 40px; line-height: 44px; }
+.quantamental-value small { font-size: 20px; color: #444; }
+.rating-history { margin-top: 20px; }
+.rating-history > svg { width: 100%; margin-top: 30px; display: block; }
+.fundamental-factors { display: flex; justify-content: center; flex-wrap: wrap; max-width: 450px; margin: 90px auto 55px; gap: 34px 22px; }
+.fundamental-factors > button { display: flex; align-items: center; flex-direction: column; width: 120px; padding: 0; border: 0; background: transparent; font-size: 14px; color: #444; }
+.factor-ring { display: block; width: 120px; height: 120px; position: relative; }
+.factor-ring > svg { width: 120px; height: 120px; transform: rotate(-90deg); fill: none; stroke-width: 7; }
+.factor-track { stroke: #e6e6e6; }
+.factor-value { stroke: green; stroke-linecap: round; }
+.factor-ring b { position: absolute; top: 0; left: 0; border-radius: 50%; width: 52px; height: 52px; line-height: 52px; background: green; color: white; font-weight: 400; font-size: 23px; }
+.factor-symbol { position: absolute; top: 44px; left: 46px; width: 32px; height: 32px; color: #555; }
+.factor-symbol svg { width: 32px; height: 32px; }
+.fundamental-source { font-size: 12px; color: #555; margin-top: 32px; }
+@media(max-width: 800px) {
+  .fundamental-surface { padding: 60px 18px 24px; }
+  .fundamental-company { gap: 8px; height: auto; flex-wrap: wrap; }
+  .brokerage-mode .fundamental-company h2 { font-size: 23px; line-height: 30px; flex: 1; }
+  .fundamental-company > button { width: 30px; }
+  .fundamental-company > span { padding: 8px; }
+  .fundamental-grid { grid-template-columns: 1fr; }
+  .fundamental-factors { margin: 36px auto; gap: 20px 8px; }
+  .fundamental-panel { padding: 20px 12px; }
+  .fundamental-search { margin-bottom: 30px; }
+}
+
+/* Strategy Builder: supplied walkthrough400–410s; controls stay local. */
+.strategy-builder { padding: 120px 60px 40px; }
+.builder-tabs { align-items:center; margin-bottom:38px; gap:50px; }
+.builder-tabs button { padding:10px 0; font-size:17px; }
+.builder-tabs button:first-child { color:inherit; }
+.builder-tabs button[aria-pressed="true"] { color:#1678bb; }
+.builder-tabs button[aria-label] { font-size:26px; width:28px; }
+.builder-categories { margin-bottom:44px; }
+.builder-categories button { border-color:#1678bb; color:#1678bb; padding:10px 16px; }
+.builder-tiles { gap:30px; }
+.builder-tiles > button { height:280px; background:#e8edf1; }
+.builder-tiles > button > img { width:100%; height:100%; object-fit:fill; }
+.builder-tiles > button > span { white-space:normal; overflow-wrap:anywhere; padding:52px 20px 22px; background:#16202a; }
+.builder-source, .builder-results-note { color:#555; font-size:13px; line-height:1.6; margin-top:32px; }
+.builder-screening { position:relative; padding:58px 54px 0; margin:-28px -20px 0; }
+.builder-screening::before { content:""; position:absolute; inset:0 0 auto; height:315px; background:linear-gradient(100deg,#dfe3e8,#f1f2f6); z-index:0; }
+.builder-screening > * { position:relative; }
+.builder-screening header { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+.builder-screening h2 { margin:0; font-size:28px; font-weight:400; }
+.builder-screening header button { color:#1678bb; border:0; }
+.builder-result-links { display:flex; gap:40px; margin:25px 0 26px; }
+.builder-result-links button { border:0; background:transparent; color:#444; padding:0; text-decoration:underline; font-size:17px; }
+.builder-filter-card { padding:18px 30px 62px; border-radius:5px; box-shadow:0 4px 18px #0001; background:#fff; position:relative; }
+.builder-filter-actions { display:flex; justify-content:flex-end; gap:30px; }
+.builder-filter-actions button { background:transparent; border:0; color:#1678bb; padding:0; }
+.builder-switch { display:inline-block; width:44px; height:20px; border-radius:20px; background:#ccc; vertical-align:middle; margin-left:10px; }
+.builder-switch::before { content:""; display:block; width:24px; height:24px; border-radius:50%; background:white; box-shadow:0 2px 4px #0002; transform:translateY(-2px); }
+[aria-checked="true"] .builder-switch { background:#1678bb; }
+[aria-checked="true"] .builder-switch::before { transform:translate(20px,-2px); }
+.builder-selects { display:flex; gap:30px; margin:44px 0 20px; }
+.builder-selects label { display:flex; flex-direction:column; gap:12px; width:24%; font-size:13px; color:#777; }
+.builder-selects select { border:0; border-bottom:1px solid #ddd; border-radius:0; padding:6px 0; background:transparent; color:#222; font:inherit; font-size:18px; }
+.builder-criteria { display:flex; overflow:auto; gap:10px; padding:2px 0; }
+.builder-criteria button { flex-shrink:0; color:#1678bb; background:#f0f1fa; border:1px solid #d7deec; border-radius:2px; font-size:17px; padding:10px 14px; }
+.builder-criteria button[aria-pressed="true"] { border-color:#1678bb; }
+.brokerage-mode .builder-more { position:absolute; bottom:-23px; left:50%; transform:translateX(-50%); background:#1678bb; color:white; border:0; border-radius:30px; white-space:nowrap; }
+.builder-results-note { margin-top:80px; padding:28px; border:1px solid #eee; }
+@media(max-width:800px) {
+ .strategy-builder { padding:36px 16px; }
+ .builder-tabs { gap:20px; flex-wrap:wrap; margin-bottom:28px; }
+ .builder-tabs button { font-size:15px; }
+ .builder-categories { flex-wrap:wrap; margin-bottom:28px; }
+ .builder-tiles { grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
+ .builder-tiles > button { height:210px; min-width:0; }
+ .builder-tiles > button > span { font-size:17px; padding:20px 12px; }
+ .builder-screening { margin:0; padding:28px 12px 0; min-width:0; }
+ .builder-screening h2 { font-size:22px; }
+ .builder-result-links { gap:20px; flex-wrap:wrap; }
+ .builder-filter-card { padding:20px 12px 50px; }
+ .builder-filter-actions { gap:16px; flex-wrap:wrap; }
+ .builder-selects { flex-direction:column; gap:20px; margin-top:28px; }
+ .builder-selects label { width:100%; }
+}
+
+/* Fundamental explorer: native380s geometry, historical outlines only. */
+.explorer-surface { padding:115px 40px 36px; }
+.explorer-surface .fundamental-search { margin-right:20px; margin-bottom:12px; }
+.fundamental-explorer { display:grid; grid-template-columns:248px minmax(0,1fr); gap:72px; }
+.explorer-controls { padding-top:30px; min-width:0; }
+.explorer-mode { display:flex; gap:12px; margin-bottom:24px; }
+.brokerage-mode .explorer-mode button { color:#222; width:119px; height:44px; border:1px solid #f2f2f2; background:white; border-radius:6px; font-size:14px; padding:0; }
+.explorer-mode button[aria-pressed="true"] { border:2px solid black; background:#edf0f2; }
+.explorer-mode button span { margin-right:8px; }
+.brokerage-mode .explorer-filter { display:block; position:relative; width:100%; height:94px; padding:14px 20px; text-align:left; color:#222; border-radius:0; background:white; border:0; border-bottom:1px solid #f7f7f7; font-size:17px; }
+.explorer-filter small { display:block; font-size:14px; color:#666; margin-bottom:8px; }
+.explorer-filter i { position:absolute; right:24px; top:38px; border:6px solid transparent; border-top-color:black; }
+.explorer-rating { padding-top:32px; color:#666; font-size:13px; }
+.explorer-rating p { margin-bottom:12px; padding-left:20px; }
+.explorer-rating > div { display:flex; justify-content:space-between; padding-right:20px; }
+.explorer-rating .explorer-spectrum { height:6px; margin-right:20px; padding:0; border-radius:4px; background:linear-gradient(to right,#ff2028 0 40%,#7546ff 40% 60%,#00ca00 60% 80%,#008000 80%); }
+.fundamental-chart-scroll { min-width:0; overflow:auto; }
+.fundamental-bubble-chart { display:block; width:1150px; height:520px; }
+.fundamental-bubble-chart g { cursor:pointer; outline:none; }
+.fundamental-bubble-chart g:hover circle,.fundamental-bubble-chart g:focus circle { stroke-width:6; stroke-dasharray:5 3; }
+.fundamental-bubble-chart text { fill:black; pointer-events:none; }
+.explorer-table-wrap { overflow:auto; max-height:520px; font-size:14px; }
+.explorer-observed-table { width:100%; border-collapse:collapse; }
+.explorer-observed-table th,.explorer-observed-table td { padding:12px; border-bottom:1px solid #eee; text-align:left; }
+.explorer-observed-table button { border:0; background:transparent; color:#1775bf; }
+@media(max-width:800px) {
+  .explorer-surface { padding:60px 18px 24px; }
+  .explorer-surface .fundamental-search { margin-right:0; margin-bottom:16px; }
+  .fundamental-explorer { grid-template-columns:minmax(0,1fr); gap:20px; }
+  .explorer-controls { padding-top:0; }
+  .explorer-mode { margin-bottom:8px; }
+  .brokerage-mode .explorer-filter { height:80px; }
+  .explorer-rating { padding-top:16px; }
+  .fundamental-chart-scroll { max-width:100%; }
+}
+
+/* OptionsPlay provenance belongs to the historical screen, not a live quote. */
+.options-provenance, #options-snapshot-status { font-size: 13px; line-height: 1.5; }
+[data-option-reset] { margin-bottom: 8px; }

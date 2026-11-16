@@ -1,0 +1,7 @@
+.secrets/
+__pycache__/
+*.pyc
+node_modules/
+video/v4/frames/
+video/v4/out/
+video/v4/final/
