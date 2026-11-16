@@ -1,12 +1,12 @@
 <div align="center">
 
-# Verity
+# Verity — Équipe 56
 
 ### Chaque chiffre a un reçu.
 
 Un système agentique **explicable** pour investisseurs particuliers — Datathon Polyfinances 2026 (AlphaForge AI)
 
-**Auteur : Emilien Bel**
+**Équipe 56 — Auteur : Emilien Bel**
 
 [▶ Film de démo (4 min 15)](https://youtu.be/Uri8o8oOOuk) ·
 [One-pager (PDF)](https://drive.google.com/file/d/1TKNiokm5OwzrVCkVMTxUVQiKKLvJaFXF/view) ·
