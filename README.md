@@ -8,7 +8,7 @@ Un système agentique **explicable** pour investisseurs particuliers — Datatho
 
 **Auteur : Emilien Bel**
 
-[▶ Film de démo (4 min 15)](https://drive.google.com/file/d/1K_xu5ymcV53y0xpge9J23JRFPKQBL8RO/view) ·
+[▶ Film de démo (4 min 15)](https://youtu.be/Uri8o8oOOuk) ·
 [One-pager (PDF)](https://drive.google.com/file/d/1TKNiokm5OwzrVCkVMTxUVQiKKLvJaFXF/view) ·
 [Note technique (PDF)](https://drive.google.com/file/d/1qZj2TivpXK23FP7a9IDoS50a0LwvFuGT/view)
 
@@ -20,7 +20,7 @@ Un système agentique **explicable** pour investisseurs particuliers — Datatho
 
 | Livrable | Lien |
 |---|---|
-| Film de démo (≈ 4 min 15, voix ElevenLabs) | [Google Drive](https://drive.google.com/file/d/1K_xu5ymcV53y0xpge9J23JRFPKQBL8RO/view) · [sous-titres .srt](https://drive.google.com/file/d/1_gyL3hvewqKroIw11GfMsLQqdNestPXU/view) |
+| Film de démo (≈ 4 min 15, voix ElevenLabs) | [YouTube](https://youtu.be/Uri8o8oOOuk) · [sous-titres .srt](https://drive.google.com/file/d/1_gyL3hvewqKroIw11GfMsLQqdNestPXU/view) |
 | One-pager (1 page A4) | [PDF](https://drive.google.com/file/d/1TKNiokm5OwzrVCkVMTxUVQiKKLvJaFXF/view) · [Google Doc éditable](https://docs.google.com/document/d/1yiWcIxgyzVOhq3kBjqcfldIoVyBsJhhN8BhUrm28weI/edit) · copie dans le dépôt : [`docs/Verity_one_pager.pdf`](docs/Verity_one_pager.pdf) |
 | Documentation technique (4 pages) | [PDF](https://drive.google.com/file/d/1qZj2TivpXK23FP7a9IDoS50a0LwvFuGT/view) · [Google Doc éditable](https://docs.google.com/document/d/1sU1xX3M1y6JlHU7oMLFuP7hdIyCaE2J9kLyjPHOlRv0/edit) · copie dans le dépôt : [`docs/Verity_documentation_technique.pdf`](docs/Verity_documentation_technique.pdf) |
 | Application (AWS, us-east-1) | `https://13hgyrsu38.execute-api.us-east-1.amazonaws.com/` — compte jetable de l'événement, **peut ne plus être en ligne** (destruction AWS le 16 novembre 2026) |
